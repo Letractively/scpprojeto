@@ -1,0 +1,108 @@
+#{extends 'main.html' /}
+#{set title:'Inclusão' /}
+
+#{form @Funcionarios.cadastrar_funcionario()}
+	#{ifErrors}
+	  <div class="linha"><p style="color:red;"><strong>ATENÇÃO: </strong>Preencha todos os campos obrigatórios.</p></div>
+		<div class="linha"></div>
+   #{/ifErrors}
+
+   
+   <div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="pnome">Nome de usuario:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="username" id="username" value="${params.username}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="pnome">Nome:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="pnome" id="pnome" value="${params.pnome}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="unome">Sobrenome:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="unome" id="unome" value="${params.unome}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">E-mail:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="email" id="email" value="${params.email}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Senha:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="password" id="password" value="${params.password}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">RG:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="rg" id="rg" value="${params.rg}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">CPF:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="cpf" id="cpf" value="${params.cpf}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="telefone">Telefone:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="telefone" id="telefone" value="${params.telefone}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Endereço:</label></p>
+			</div>
+			<div class="dir">
+				<p><textarea rows"3" cols"10" type="text" name="endereco" id="endereco" value="${params.endereco}"></textarea></p>
+			</div>
+		</div>
+	</div>
+	<div class="btn-submit">
+		<p><input type="submit" value="Cadastrar Funcionario" /></p>
+	</div>
+	<div class="menuTools">
+	<p><a href="@{Funcionarios.index()}">Voltar</p>
+	</div>
+
+#{/form}

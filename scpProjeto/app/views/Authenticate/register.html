@@ -1,0 +1,88 @@
+<html>
+
+	<head>
+		<title>#{get 'title' /}</title>
+		<meta charset="${_response_encoding}">
+		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+		#{get 'moreStyles' /}
+		<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+		<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+		#{get 'moreScripts' /}
+	</head>
+	<body>
+		<div id = "logo">
+			<a href="javascript:location.reload(true);"><img src = "@{'/public/images/scplogo.png'}"></a>	
+		</div>
+		
+		<div id = "geral">
+		
+		<div id = "menu">
+		<h3>Registro de usuario</h3>
+				
+		</div>
+
+		<div id="content">
+			<p>
+			Para registrar-se no SCP preencha os campos abaixo:
+			</p>
+			<div id="registerForm">
+				<form action="@{Authenticate.doRegister()}" method="POST">
+					<p class="field">
+						<span class="error">#{error 'funcionario.username' /}</span>
+						<label>Username:</label>
+						<input type="text" name="funcionario.username"
+						value="${flash['funcionario.username']}"/>
+					</p>
+					<p class="field">
+						<span class="error">#{error 'funcionario.pnome' /}</span>
+						<label>Nome</label>
+						<input type="text" name="funcionario.pnome"
+						value="${flash['funcionario.pnome']}"/>
+					</p>
+					<p class="field">
+						<span class="error">#{error 'funcionario.unome' /}</span>
+						<label>Sobrenome:</label>
+						<input type="text" name="funcionario.unome"
+						value="${flash['funcionario.unome']}"/>
+					</p>
+					<p class="field">
+						<span class="error">#{error 'funcionario.cpf' /}</span>
+						<label>CPF:</label>
+						<input type="text" name="funcionario.cpf"
+						value="${flash['funcionario.cpf']}"/>
+					</p>
+					<p class="field">
+						<span class="error">#{error 'funcionario.telefone' /}</span>
+						<label>Telefone:</label>
+						<input type="text" name="funcionario.telefone"
+						value="${flash['funcionario.telefone']}"/>
+					</p>
+					<p class="field">
+						<span class="error">#{error 'funcionario.endereco' /}</span>
+						<label>Endereco:</label>
+						<input type="text" name="funcionario.endereco"
+						value="${flash['funcionario.endereco']}"/>
+					</p>
+					<p class="field">
+						<span class="error">#{error 'funcionario.email' /}</span>
+						<label>E-mail:</label>
+						<input type="text" name="funcionario.email" value="${flash['funcionario.email']}"/>
+					</p>
+					<p class="field">
+						<span class="error">#{error 'funcionario.password' /}</span>
+						<label>Password:</label>
+						<input type="password" name="funcionario.password" />
+					</p>
+					
+					<p class="field">
+						<span class="error">#{error 'funcionario.rg' /}</span>
+						<label>RG:</label>
+						<input type="text" name="funcionario.rg"
+						value="${flash['funcionario.rg']}"/>
+					</p>
+					<input type="submit" name="create" value="Register"/>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

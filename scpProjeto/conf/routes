@@ -1,0 +1,31 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+GET		/cliente								Clientes.index
+GET		/cliente/visualizar						Clientes.visualizar
+GET		/cliente/cadastrar						Clientes.inserir
+GET		/cliente/editar							Clientes.editar
+GET 	/funcionario							Funcionarios.index
+GET		/funcionario/visualizar					Funcionarios.visualizar
+GET		/funcionario/cadastrar					Funcionarios.inserir
+GET		/funcionario/editar						Funcionarios.editar
+GET     /status                               	Statuses.index
+GET 	/status/cadastrar						Statuses.inserir
+GET		/status/visualizar						Statuses.visualizar
+GET		/status/editar							Statuses.editar
+GET     /pedido                                 Pedidos.index
+GET 	/pedido/cadastrar						Pedidos.inserir
+GET		/pedido/visualizar/						Pedidos.visualizar
+GET		/pedido/editar/							Pedidos.editar
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}
