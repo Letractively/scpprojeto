@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+#{set title:'Listagem' /}
+
+#{if funcionarios.size() == 0}
+<div id = "menumeio">
+		<div class="linha">
+			<p>Nenhum Funcionario cadastrado.</p>
+		</div>
+	#{/if}
+	#{else}
+		#{list items:funcionarios, as:'funcionario'}
+		<div class="linha">
+			<p><a href="@{funcionarios.visualizar(funcionario.cpf)}">&raquo; ${funcionario.pnome} ${funcionario.unome} - ${funcionario.cpf}</a></p>
+		</div>
+	  #{/list}
+	#{/else}
+
+	<div class="menuTools">
+		<p><a href="@{Funcionarios.inserir()}">Inserir Funcionario</p>
+	</div>
+</div>

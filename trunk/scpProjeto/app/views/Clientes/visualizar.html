@@ -1,0 +1,62 @@
+#{extends 'main.html' /}
+#{set title:'Visualiza�‹o' /}
+
+<div id = "menu2">
+	<div id="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Nome:</label></p>
+			</div>
+			<div class="dir">
+				<p>${cliente.pnome}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Sobrenome:</label></p>
+			</div>
+			<div class="dir">
+				<p>${cliente.unome}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">CPF:</label></p>
+			</div>
+			<div class="dir">
+				<p>${cliente.cpf}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="telefone">Telefone:</label></p>
+			</div>
+			<div class="dir">
+				<p>${cliente.telefone}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="email">Endereço:</label></p>
+			</div>
+			<div class="dir">
+				<p>${cliente.endereco}</p>
+			</div>
+		</div>
+	</div>
+	<div class="btn-submit">
+		<p>
+			<a href="@{Clientes.index()}">Voltar</a>
+			<a href="@{Clientes.editar(cliente.cpf)}">Editar</a>
+			<a href="@{Clientes.excluir(cliente.cpf)}" onClick="if(!confirm('Deseja excluir ${cliente.pnome} ${cliente.unome}?')){return false;}">Excluir</a>
+		</p>
+	</div>
+</div>

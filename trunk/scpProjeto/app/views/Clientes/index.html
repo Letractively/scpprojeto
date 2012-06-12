@@ -1,0 +1,19 @@
+#{extends 'main.html' /}
+#{set title:'Listagem' /}
+
+#{if clientes.size() == 0}
+	<div class="linha">
+		<p>Nenhum cliente cadastrado.</p>
+	</div>
+#{/if}
+#{else}
+	#{list items:clientes, as:'cliente'}
+	<div class="linha">
+		<p><a href="@{Clientes.visualizar(cliente.cpf)}">&raquo; ${cliente.pnome} ${cliente.unome} - ${cliente.cpf}</a></p>
+	</div>
+  #{/list}
+#{/else}
+
+<div class="menuTools">
+	<p><a href="@{Clientes.inserir()}">Inserir Cliente</p>
+</div>

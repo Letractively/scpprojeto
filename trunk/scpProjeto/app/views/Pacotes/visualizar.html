@@ -1,0 +1,22 @@
+#{extends 'main.html' /} #{set title:'Visualizacao' /}
+
+<div class="linha">
+	<div class="duas-colunas">
+		<div class="esq">
+			<p>
+				<label for="nome">Nome:</label>
+			</p>
+		</div>
+		<div class="dir">
+			<p>${pacote.nome}</p>
+		</div>
+	</div>
+</div>
+<div class="btn-submit">
+	<p>
+		<a href="@{Pacotes.index()}">Voltar</a> <a
+			href="@{Pacotes.editar(pacote.nome)}">Editar</a> <a
+			href="@{Pacotes.excluir(pacote.nome)}"
+			onClick="if(!confirm('Deseja excluir este pacote?')){return false;}">Excluir</a>
+	</p>
+</div>

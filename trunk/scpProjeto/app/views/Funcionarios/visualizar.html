@@ -1,0 +1,101 @@
+#{extends 'main.html' /}
+#{set title:'Visualiza�‹o' /}
+
+
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Nome de usuario:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.username}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Nome:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.pnome}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Sobrenome:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.unome}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">E-mail:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.email}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Senha:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.password}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">RG:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.rg}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">CPF:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.cpf}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="telefone">Telefone:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.telefone}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="email">Endereço:</label></p>
+			</div>
+			<div class="dir">
+				<p>${funcionario.endereco}</p>
+			</div>
+		</div>
+	</div>
+	<div class="btn-submit">
+		<p>
+			<a href="@{Funcionarios.index()}">Voltar</a>
+			<a href="@{Funcionarios.editar(funcionario.cpf)}">Editar</a>
+			<a href="@{Funcionarios.excluir(funcionario.cpf)}" onClick="if(!confirm('Deseja excluir ${funcionario.pnome} ${funcionario.unome}?')){return false;}">Excluir</a>
+		</p>
+	</div>

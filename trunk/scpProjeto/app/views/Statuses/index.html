@@ -1,0 +1,19 @@
+#{extends 'main.html' /}
+#{set title:'Listagem' /}
+
+#{if statuses.size() == 0}
+	<div class="linha">
+		<p>Nenhum status cadastrado.</p>
+	</div>
+#{/if}
+#{else}
+	#{list items:statuses, as:'status'}
+	<div class="linha">
+		<p><a href="@{Statuses.visualizar(status.nome)}">&raquo; ${status.nome}</a></p>
+	</div>
+  #{/list}
+#{/else}
+
+<div class="menuTools">
+	<p><a href="@{Statuses.inserir()}">Inserir Status</p>
+</div>

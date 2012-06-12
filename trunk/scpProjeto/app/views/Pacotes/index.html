@@ -1,0 +1,20 @@
+#{extends 'main.html' /} #{set title:'Listagem' /}
+
+#{if pacotes.size() == 0}
+<div class="linha">
+	<p>Nenhum pacote cadastrado.</p>
+</div>
+#{/if} #{else} #{list items:pacotes, as:'pacote'}
+<div class="linha">
+	<p>
+		<a href="@{Pacotes.visualizar(pacote.nome)}">&raquo;
+			${pacote.nome}</a>
+	</p>
+</div>
+#{/list} #{/else}
+
+<div class="menuTools">
+	<p>
+		<a href="@{Pacotes.inserir()}">Inserir Pacote
+	</p>
+</div>

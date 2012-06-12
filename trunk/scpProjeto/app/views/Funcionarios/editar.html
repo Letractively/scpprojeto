@@ -1,0 +1,108 @@
+#{extends 'main.html' /}
+#{set title:'Edição' /}
+
+#{form @Funcionarios.editar_funcionario(funcionario.id)}
+	#{ifErrors}
+	  <div class="linha"><p style="color:red;"><strong>ATENÇÃO: </strong>Preencha todos os campos obrigatórios.</p></div>
+		<div class="linha"></div>
+   #{/ifErrors}
+
+   
+   <div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Nome de usuario:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="username" id="username" value="${funcionario.username}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Nome:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="pnome" id="pnome" value="${funcionario.pnome}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Sobrenome:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="unome" id="unome" value="${funcionario.unome}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">E-mail:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="email" id="email" value="${funcionario.email}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">Senha:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="password" id="password" value="${funcionario.password}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">CPF:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="cpf" id="cpf" value="${funcionario.cpf}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="nome">RG:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="rg" id="rg" value="${funcionario.rg}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="telefone">Telefone:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="telefone" id="telefone" value="${funcionario.telefone}" /></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="email">Endereço:</label></p>
+			</div>
+			<div class="dir">
+				<p><textarea rows="3" cols="10" name="endereco" id="endereco" value="${funcionario.endereco}"></textarea></p>
+			</div>
+		</div>
+	</div>
+	<div class="btn-submit">
+		<p><input type="submit" value="Editar Funcionario ${funcionario.pnome} ${funcionario.unome}" /></p>
+	</div>
+	<div class="menuTools">
+	<p><a href="@{Funcionarios.index()}">Voltar</p>
+	</div>
+
+#{/form}
