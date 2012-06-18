@@ -13,7 +13,7 @@
 				<p><label for="cliente">Cliente:</label></p>
 			</div>
 			<div class="dir">
-				<p><input type="text" name="cliente" id="cliente" value="${params.cliente}" /></p>
+			<p><select name="cliente" style="width: 250px"><OPTION SELECTED>Todos #{list items:clientes, as:'d'} <option>${d.pnome} #{/list}</select></p>
 			</div>
 		</div>
 	</div>
@@ -54,6 +54,36 @@
 			</div>
 			<div class="dir">
 				<p><input type="text" name="funcionario" id="funcionario" value="${params.funcionario}"/></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="numPedido">Numero de Pedido:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="numPedido" id="numPedido" value="${params.numPedido}"/></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="dataInscricao">Data de Inscricao:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="dataInscricao" id="dataInscricao" value="${params.dataInscricao}"/></p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="dataCadastro">Data de Cadastro:</label></p>
+			</div>
+			<div class="dir">
+				<p><input type="text" name="dataCadastro" id="dataCadastro" value="${params.dataCadastro}"/></p>
 			</div>
 		</div>
 	</div>

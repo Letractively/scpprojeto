@@ -9,7 +9,7 @@
 #{else}
 	#{list items:pedidos, as:'pedido'}
 	<div class="linha">
-		<p><a href="@{Pedidos.visualizar(pedido.cliente)}">&raquo; ${pedido.cliente} - ${pedido.pacote}</a></p>
+		<p><a href="@{Pedidos.visualizar(pedido.numPedido)}">&raquo; ${pedido.cliente} - ${pedido.pacote}</a></p>
 	</div>
   #{/list}
 #{/else}

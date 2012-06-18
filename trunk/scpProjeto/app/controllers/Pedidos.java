@@ -16,12 +16,14 @@ public class Pedidos extends Controller {
     }
 
 		public static void inserir() {
-			render();
+			List<Cliente> clientes = Cliente.findAll();
+			render(clientes);
 		}
 		
-		public static void visualizar(String cliente) {
-			Pedido pedido = Pedido.find("cliente", cliente).first();
+		public static void visualizar(String numPedido) {
+			Pedido pedido = Pedido.find("numPedido", numPedido).first();
 			render(pedido);
+			
 		}
 		
 		public static void editar(String cliente) {
@@ -35,8 +37,8 @@ public class Pedidos extends Controller {
 			index();
 		}
 		
-		public static void cadastrar_pedido(String cliente, String pacote, String status, String formaPag, String funcionario) { 
-			Pedido pedido = new Pedido(cliente, pacote, status, formaPag, funcionario);
+		public static void cadastrar_pedido(String cliente, String pacote, String status, String formaPag, String funcionario, String numPedido, String dataInscricao, String dataCadastro) { 
+			Pedido pedido = new Pedido(cliente, pacote, status, formaPag, funcionario, numPedido, dataInscricao, dataCadastro);
 			if (validation.hasErrors()) {
 				render("Pedidos/inserir.html", pedido);
 			}
@@ -60,6 +62,9 @@ public class Pedidos extends Controller {
 			pedido.status = request.params.get("status");
 			pedido.formaPag = request.params.get("formaPag");
 			pedido.formaPag = request.params.get("funcionario");
+			pedido.numPedido = request.params.get("numPedido");
+			pedido.dataInscricao = request.params.get("dataInscricao");
+			pedido.dataCadastro = request.params.get("dataCadastro");
 			
 			pedido.save();
 			index();
