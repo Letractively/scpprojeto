@@ -24,6 +24,7 @@
 			<a href="javascript:location.reload(true);"><img alt = "scp" src = "@{'/public/images/scplogo.png'}"></a>	
 		</div>
 		
+		
 		#{if session.user != null}
 	
 		<div id = "menu">
@@ -35,21 +36,28 @@
 		<a href="@{Funcionarios.index()}"><FONT SIZE=+2><b>FUNCIONARIO</b></font></a>
 		<a href="@{Authenticate.logout()}"><FONT color = "red" SIZE=+2><b>LOGOUT</b></font></a>
 		</div>
-		
-		<h3>
-		
-		</h3>
+
 		
 		<div id = "bot">
 			#{doLayout /}
 		</div>	
-	#{/if}
-	#{else}
+		#{/if}
+		#{else}
 		<div id = "menu">
 			<li><a href="@{Authenticate.login()}"><FONT SIZE=+2><b>LOGIN</b></font></a></li>
 		</div>
-	#{/else}
+		#{/else}
 	
+	<br>
+		<div id = "imageindex">
+			<b><font color = "red">Em manutencao!</font></b><br><br>
+			
+			Sistema de Controle de Pedidos (SCP) - Esquecendo as planilhas...
+			<br>
+			
+			
+			 <a href="javascript:location.reload(true);"><img alt = "scp" src = "@{'/public/images/req.jpg'}"></a>	
+ 		</div>
     </body>
 	
 	
