@@ -6,6 +6,16 @@
 		color: black;
 }
 
+#imageindex{
+	text-align: center;
+}
+
+#alignform{ 
+display: block;
+whidth: 100px;
+float: lefet;
+}
+
 #menuTools {
 		color: black;
 		background-color: blue;
