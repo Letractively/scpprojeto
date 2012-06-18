@@ -41,22 +41,26 @@
 		<div id = "bot">
 			#{doLayout /}
 		</div>	
+		
 		#{/if}
+		
 		#{else}
 		<div id = "menu">
-			<li><a href="@{Authenticate.login()}"><FONT SIZE=+2><b>LOGIN</b></font></a></li>
+			<a href="@{Authenticate.login()}"><FONT SIZE=+2><b>LOGIN</b></font></a>
 		</div>
+		
 		#{/else}
 	
 	<br>
+	
 		<div id = "imageindex">
 			<b><font color = "red">Em manutencao!</font></b><br><br>
 			
-			Sistema de Controle de Pedidos (SCP) - Esquecendo as planilhas...
+			<font color = "black">Sistema de Controle de Pedidos (SCP) - Esquecendo as planilhas...</font>
 			<br>
 			
 			
-			 <a href="javascript:location.reload(true);"><img alt = "scp" src = "@{'/public/images/req.jpg'}"></a>	
+			 <img alt = "req" src = "@{'/public/images/req.jpg'}">	
  		</div>
     </body>
 	
