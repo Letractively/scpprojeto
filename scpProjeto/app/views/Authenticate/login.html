@@ -18,16 +18,14 @@
 
 		<div id = "menu">
 		
-		<h3>Login SCP</h3>
+		<h3>Login</h3>
 				
 		</div>
 		<div id="content">
 			<p>
 				Para logar no SCP, preencha os campos abaixo:
 				</p>
-				<p>
-				Se ainda nao esta cadastrado <a href="@{Authenticate.register()}">clique aqui.</a>.
-			</p>
+				
 			<div id="loginForm">
 				<form action="@{Authenticate.doLogin()}" method="POST">
 					<p class="field">
@@ -42,6 +40,10 @@
 					</p>
 					<input type="submit" name="create" value="Login"/>
 				</form>
+				
+				<p>
+				Se ainda nao e cadastrado <a href="@{Authenticate.register()}">clique aqui</a>.
+			</p>
 			
 			</div>
 		</div>
