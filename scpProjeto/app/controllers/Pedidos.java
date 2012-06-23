@@ -28,7 +28,8 @@ public class Pedidos extends Controller {
 		
 		public static void editar(String cliente) {
 			Pedido pedidos = Pedido.find("cliente", cliente).first();
-			render(pedidos);
+			List<Cliente> clientes = Cliente.findAll();
+			render(pedidos,clientes);
 		}
 		
 		public static void excluir(String cliente) {
