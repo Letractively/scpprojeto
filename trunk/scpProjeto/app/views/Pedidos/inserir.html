@@ -23,7 +23,7 @@
 				<p><label for="pacote">Pacotes:</label></p>
 			</div>
 			<div class="dir">
-				<p><input type="text" name="pacote" id="pacote" value="${params.pacote}" /></p>
+			<p><select name="pacote" style="width: 250px"><OPTION>#{list items:pacotes, as:'d'} <option>${d.nome} #{/list}</select></p>
 			</div>
 		</div>
 	</div>
@@ -33,7 +33,7 @@
 				<p><label for="status">Status:</label></p>
 			</div>
 			<div class="dir">
-				<p><input type="text" name="status" id="status" value="${params.status}" /></p>
+			<p><select name="status" style="width: 250px"><OPTION>#{list items:statuses, as:'d'} <option>${d.nome} #{/list}</select></p>
 			</div>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 				<p><label for="funcionario">Funcionario:</label></p>
 			</div>
 			<div class="dir">
-				<p><input type="text" name="funcionario" id="funcionario" value="${params.funcionario}"/></p>
+			<p><select name="funcionario" style="width: 250px"><OPTION>#{list items:funcionarios, as:'d'} <option>${d.pnome} #{/list}</select></p>
 			</div>
 		</div>
 	</div>

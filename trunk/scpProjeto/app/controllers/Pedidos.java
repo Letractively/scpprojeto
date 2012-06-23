@@ -17,7 +17,10 @@ public class Pedidos extends Controller {
 
 		public static void inserir() {
 			List<Cliente> clientes = Cliente.findAll();
-			render(clientes);
+			List<Pacote> pacotes = Pacote.findAll();
+			List<Status> statuses = Status.findAll();
+			List<Funcionario> funcionarios = Funcionario.findAll();
+			render(clientes,pacotes,statuses,funcionarios);
 		}
 		
 		public static void visualizar(String numPedido) {
@@ -29,7 +32,10 @@ public class Pedidos extends Controller {
 		public static void editar(String cliente) {
 			Pedido pedidos = Pedido.find("cliente", cliente).first();
 			List<Cliente> clientes = Cliente.findAll();
-			render(pedidos,clientes);
+			List<Pacote> pacotes = Pacote.findAll();
+			List<Status> statuses = Status.findAll();
+			List<Funcionario> funcionarios = Funcionario.findAll();
+			render(pedidos,clientes,pacotes,statuses,funcionarios);
 		}
 		
 		public static void excluir(String cliente) {
