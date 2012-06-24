@@ -20,7 +20,6 @@ public class Cliente extends Model {
 	public String telefone;
 	
 	@Required
-	@MaxSize(1000)
 	public String endereco;
 	
 	public Cliente (String pnome, String unome, String cpf, String telefone, String endereco) {

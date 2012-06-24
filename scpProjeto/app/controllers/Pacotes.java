@@ -35,7 +35,7 @@ public class Pacotes extends Controller {
 		index();
 	}
 
-	public static void cadastrar_pacote(@Required String nome, boolean net, boolean tv, boolean telefone) {
+	public static void cadastrar_pacote(@Required String nome, int net, int tv, int telefone) {
 		Pacote pacote = new Pacote(nome, net, tv, telefone);
 		if (validation.hasErrors()) {
 			render("Pacotes/inserir.html", pacote);
