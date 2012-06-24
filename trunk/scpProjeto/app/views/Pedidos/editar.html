@@ -13,7 +13,7 @@
 				<p><label for="cliente">Cliente:</label></p>
 			</div>
 			<div class="dir">
-			<p><select name="cliente" style="width: 250px"><OPTION> #{list items:clientes, as:'d'} <option>${d.pnome} #{/list}</select></p>
+			<p><select name="cliente" style="width: 250px"><OPTION SELECTED> ${pedidos.cliente} #{list items:clientes, as:'d'} <option>${d.pnome} #{/list}</select></p>
 			</div>
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 				<p><label for="pacote">Pacotes:</label></p>
 			</div>
 			<div class="dir">
-			<p><select name="pacote" style="width: 250px"><OPTION> #{list items:pacotes, as:'d'} <option>${d.nome} #{/list}</select></p>
+			<p><select name="pacote" style="width: 250px"><OPTION SELECTED> ${pedidos.pacote} #{list items:pacotes, as:'d'} <option>${d.nome} #{/list}</select></p>
 			</div>
 		</div>
 	</div>
@@ -33,7 +33,7 @@
 				<p><label for="status">Status:</label></p>
 			</div>
 			<div class="dir">
-			<p><select name="status" style="width: 250px"><OPTION> #{list items:statuses, as:'d'} <option>${d.nome} #{/list}</select></p>
+			<p><select name="status" style="width: 250px"><OPTION SELECTED> ${pedidos.status} #{list items:statuses, as:'d'} <option>${d.nome} #{/list}</select></p>
 			</div>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 				<p><label for="funcionario">Funcionario:</label></p>
 			</div>
 			<div class="dir">
-			<p><select name="funcionario" style="width: 250px"><OPTION> #{list items:funcionarios, as:'d'} <option>${d.pnome} #{/list}</select></p>
+			<p><select name="funcionario" style="width: 250px"><OPTION SELECTED> ${pedidos.funcionario} #{list items:funcionarios, as:'d'} <option>${d.pnome} #{/list}</select></p>
 			</div>
 		</div>
 	</div>
