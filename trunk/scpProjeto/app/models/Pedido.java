@@ -4,8 +4,8 @@ import play.*;
 import play.data.validation.Required;
 import play.db.jpa.*;
 import javax.persistence.*;
-import java.util.*;
 
+import java.util.*;
 @Entity
 	public class Pedido extends Model {
 		

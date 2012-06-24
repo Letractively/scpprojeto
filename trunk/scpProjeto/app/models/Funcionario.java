@@ -26,7 +26,6 @@ public class Funcionario extends Model {
 	public String telefone;
 	
 	@Required
-	@MaxSize(1000)
 	public String endereco;
 	
 	@Required
