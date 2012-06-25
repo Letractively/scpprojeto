@@ -33,11 +33,6 @@ public class Authenticate extends Controller {
 		Application.index();
 	}
 
-	private static boolean funcValido(Funcionario funcionario) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 	public static void login() {
 		render();
 	}

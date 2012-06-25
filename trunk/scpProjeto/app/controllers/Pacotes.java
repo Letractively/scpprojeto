@@ -16,7 +16,7 @@ import models.*;
 public class Pacotes extends Controller {
 
 	public static void index() {
-		List<Pacote> pacotes = null;
+		List<Pacote> pacotes = new ArrayList<Pacote>();
 		try {
 			pacotes = getAllPacote();
 		} catch (SQLException e) {
@@ -31,7 +31,7 @@ public class Pacotes extends Controller {
 	}
 
 	public static void visualizar(String nome) {
-		Pacote pacote = null;
+		Pacote pacote = new Pacote();
 		try {
 			pacote = encontrar_Pacote(nome);
 		} catch (SQLException e) {
@@ -42,7 +42,7 @@ public class Pacotes extends Controller {
 	}
 
 	public static void editar(String nome) {
-		Pacote pacotes= null;
+		Pacote pacotes= new Pacote();
 		try {
 			pacotes = encontrar_Pacote(nome);
 		} catch (SQLException e) {
@@ -81,7 +81,7 @@ public class Pacotes extends Controller {
 	public static void editar_pacote(String nome) {
 		validation.required(request.params.get("nome"));
 
-		Pacote pacote = null;
+		Pacote pacote = new Pacote();
 		try {
 			pacote = encontrar_Pacote(nome);
 		} catch (SQLException e) {

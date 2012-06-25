@@ -16,7 +16,7 @@ import models.*;
 public class Clientes extends Controller {
 
 	public static void index() {
-		List<Cliente> clientes = null;
+		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {
 			clientes = getAllCliente();
 		} catch (SQLException e) {
@@ -31,7 +31,7 @@ public class Clientes extends Controller {
 	}
 
 	public static void visualizar(String cpf) {
-		Cliente cliente = null;
+		Cliente cliente = new Cliente();
 		try {
 			cliente = encontrar_Cliente(cpf);
 		} catch (SQLException e) {
@@ -42,7 +42,7 @@ public class Clientes extends Controller {
 	}
 
 	public static void editar(String cpf) {
-		Cliente cliente = null;
+		Cliente cliente = new Cliente();
 		try {
 			cliente = encontrar_Cliente(cpf);
 		} catch (SQLException e) {
@@ -84,7 +84,7 @@ public class Clientes extends Controller {
 		validation.required(request.params.get("pnome"));
 		validation.required(request.params.get("cpf"));
 
-		Cliente cliente = null;
+		Cliente cliente = new Cliente();
 		try {
 			cliente = encontrar_Cliente(cpf);
 		} catch (SQLException e) {
