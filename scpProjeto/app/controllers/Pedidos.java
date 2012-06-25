@@ -62,7 +62,7 @@ public class Pedidos extends Controller {
 	}
 
 	public static void editar(String cliente) {
-		Pedido pedidos = null;
+		Pedido pedidos = new Pedido();
 		try {
 			pedidos = encontrar_Pedido(cliente);
 		} catch (SQLException e1) {

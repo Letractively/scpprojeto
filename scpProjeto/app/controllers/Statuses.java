@@ -16,7 +16,7 @@ import models.*;
 public class Statuses extends Controller {
 
 	public static void index() {
-		List<Status> statuses = null;
+		List<Status> statuses = new ArrayList<Status>();
 		try {
 			statuses = getAllStatus();
 		} catch (SQLException e) {
@@ -31,7 +31,7 @@ public class Statuses extends Controller {
 	}
 
 	public static void visualizar(String nome) {
-		Status status = null;
+		Status status = new Status();
 		try {
 			status = encontrar_Status(nome);
 		} catch (SQLException e) {
@@ -42,7 +42,7 @@ public class Statuses extends Controller {
 	}
 
 	public static void editar(String nome) {
-		Status statuses = null;
+		Status statuses = new Status();
 		try {
 			statuses = encontrar_Status(nome);
 		} catch (SQLException e) {
@@ -80,7 +80,7 @@ public class Statuses extends Controller {
 	public static void editar_status(String nome) {
 		validation.required(request.params.get("nome"));
 
-		Status status = null;
+		Status status = new Status();
 		try {
 			status = encontrar_Status(nome);
 		} catch (SQLException e) {

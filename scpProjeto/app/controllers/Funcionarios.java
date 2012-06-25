@@ -20,7 +20,7 @@ public class Funcionarios extends Controller {
 		BancoDados.conectar();
 		Connection con = BancoDados.con;
 
-		List<Funcionario> funcionarios = null;
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 		try {
 			funcionarios = getAllFuncionario();
 		} catch (SQLException e) {
@@ -35,7 +35,7 @@ public class Funcionarios extends Controller {
 	}
 
 	public static void visualizar(String cpf) {
-		Funcionario funcionario = null;
+		Funcionario funcionario = new Funcionario();
 		try {
 			funcionario = encontrar_Funcionario(cpf);
 		} catch (SQLException e) {
@@ -46,7 +46,7 @@ public class Funcionarios extends Controller {
 	}
 
 	public static void editar(String cpf) {
-		Funcionario funcionario = null;
+		Funcionario funcionario = new Funcionario();
 		try {
 			funcionario = encontrar_Funcionario(cpf);
 		} catch (SQLException e) {
@@ -94,7 +94,7 @@ public class Funcionarios extends Controller {
 		validation.required(request.params.get("pnome"));
 		validation.required(request.params.get("cpf"));
 
-		Funcionario funcionario = null;
+		Funcionario funcionario = new Funcionario();
 		try {
 			funcionario = encontrar_Funcionario(cpf);
 		} catch (SQLException e1) {
