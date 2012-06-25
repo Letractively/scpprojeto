@@ -4,7 +4,12 @@ import play.*;
 import play.mvc.*;
 import play.data.validation.*;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import models.*;
 
@@ -46,32 +51,52 @@ public class Statuses extends Controller {
 
 	public static void editar_status(String nome) {
 		validation.required(request.params.get("nome"));
-		
+
 		Status status = Status.encontrar_Status(nome);
-		
+
 		if (validation.hasErrors()) {
 			render("Statuses/editar.html", status);
 		}
-		
+
 		status.nome = request.params.get("nome");
-		
+
 		status.saveStatus();
 		index();
 	}
-	
-	public static Status encontrar_Status(String nome) {
-		return null;//TODO
+
+	public static Status encontrar_Status(String nome) throws SQLException {
+		BancoDados.conectar();
+		Connection con = BancoDados.con;
+		PreparedStatement pstm;
+		ResultSet rs;
+
+		Status status = new Status();
+
+		String query = "Select * from status where nome = ?";
+
+		pstm = (PreparedStatement) con.prepareStatement(query);
+		pstm.setString(1, nome);
+
+		rs = pstm.executeQuery();
+
+		while (rs.next()) {
+
+			status.nome = rs.getString("nome");
+
+		}
+
+		return status;
 	}
-	
+
 	public static List<Status> getAllStatus() {
 		List<Status> retorno = new ArrayList<Status>();
-		return retorno;//TODO
+		return retorno;// TODO
 	}
-	
+
 	public static void dellStatus(String nome) {
-		//TODO
+		// TODO
 	}
-	
+
 	public void saveStatus() {
 		// TODO
 	}

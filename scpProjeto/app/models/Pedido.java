@@ -25,6 +25,10 @@ public class Pedido {
 	public String dataInscricao;
 	@Required
 	public String dataCadastro;
+	
+	public Pedido(){
+		
+	}
 
 	public Pedido(String cliente, String pacote, String status,
 			String formaPag, String funcionario, String numPedido,

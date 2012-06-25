@@ -220,5 +220,37 @@ public class Funcionarios extends Controller {
 		pstm.execute();
 
 	}
+	public static boolean isValidLogin(String username, String password) throws SQLException {
+		BancoDados.conectar();
+		Connection con = BancoDados.con;
+		PreparedStatement pstm;
+		ResultSet rs;
+
+		Funcionario funcionario = new Funcionario();
+
+		String query = "Select * from funcionario where username = ? and password = ?";
+
+		pstm = (PreparedStatement) con.prepareStatement(query);
+		pstm.setString(1, username);
+		pstm.setString(2, password);
+
+		rs = pstm.executeQuery();
+
+		while (rs.next()) {
+
+			funcionario.username = rs.getString("username");
+			funcionario.pnome = rs.getString("pnome");
+			funcionario.unome = rs.getString("unome");
+			funcionario.email = rs.getString("email");
+			funcionario.password = rs.getString("password");
+			funcionario.rg = rs.getString("rg");
+			funcionario.telefone = rs.getString("telefone");
+			funcionario.cpf = rs.getString("cpf");
+			funcionario.endereco = rs.getString("endereco");
+
+		}
+
+		return (rs != null);
+	}
 
 }

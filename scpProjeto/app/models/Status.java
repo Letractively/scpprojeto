@@ -11,6 +11,10 @@ public class Status {
 
 	@Required
 	public String nome;
+	
+	public Status() {
+		super();
+	}
 
 	public Status(String nome) {
 		this.nome = nome;
