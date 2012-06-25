@@ -172,11 +172,12 @@ public class Pedidos extends Controller {
 	}
 
 	public void savePedido(Pedido pedido) throws SQLException {
+		
 		BancoDados.conectar();
 		Connection con = BancoDados.con;
 		PreparedStatement pstm;
 
-		String query = "insert into pedido (cliente, pacote, status, formaPag, funcionario, numPedido, dataInscricao, dataCadastro) values (?,?,?,?,?,?,?,?)";
+		String query = "insert into pedido (cliente, pacote, status,  formaPag, funcionario, numPedido, dataInscricao,  dataCadastro) values (?,?,?,?,?,?,?,?)";
 		pstm = (PreparedStatement) con.prepareStatement(query);
 
 		pstm.setString(1, pedido.cliente);
@@ -189,6 +190,8 @@ public class Pedidos extends Controller {
 		pstm.setString(8, pedido.dataCadastro);
 
 		pstm.execute();
+
+		
 	}
 
 }
