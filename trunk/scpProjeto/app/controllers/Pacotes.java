@@ -11,7 +11,7 @@ import models.*;
 public class Pacotes extends Controller {
 
 	public static void index() {
-		List<Pacote> pacotes = Pacote.find("order by nome asc").fetch();
+		List<Pacote> pacotes = Pacote.getAllPacote();
 		render(pacotes);
 	}
 
@@ -20,18 +20,17 @@ public class Pacotes extends Controller {
 	}
 
 	public static void visualizar(String nome) {
-		Pacote pacote = Pacote.find("nome", nome).first();
+		Pacote pacote = Pacote.encontrar_Pacote(nome);
 		render(pacote);
 	}
 
 	public static void editar(String nome) {
-		Pacote pacotes = Pacote.find("nome", nome).first();
+		Pacote pacotes = Pacote.encontrar_Pacote(nome);
 		render(pacotes);
 	}
 
 	public static void excluir(String nome) {
-		Pacote pacotes = Pacote.find("nome", nome).first();
-		pacotes.delete();
+		Pacote.dellPacote(nome);
 		index();
 	}
 
@@ -40,15 +39,15 @@ public class Pacotes extends Controller {
 		if (validation.hasErrors()) {
 			render("Pacotes/inserir.html", pacote);
 		}
-
-		pacote.save();
+		
+		pacote.savePacote();
 		index();
 	}
 	
-	public static void editar_pacote(long id) {
+	public static void editar_pacote(String nome) {
 		validation.required(request.params.get("nome"));
 		
-		Pacote pacote = Pacote.find("id", id).first();
+		Pacote pacote = Pacote.encontrar_Pacote(nome);
 		
 		if (validation.hasErrors()) {
 			render("Pacotes/editar.html", pacote);
@@ -56,7 +55,7 @@ public class Pacotes extends Controller {
 		
 		pacote.nome = request.params.get("nome");
 		
-		pacote.save();
+		pacote.savePacote();
 		index();
 	}
 

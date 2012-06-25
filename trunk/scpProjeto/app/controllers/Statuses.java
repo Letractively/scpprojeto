@@ -11,7 +11,7 @@ import models.*;
 public class Statuses extends Controller {
 
 	public static void index() {
-		List<Status> statuses = Status.find("order by nome asc").fetch();
+		List<Status> statuses = Status.getAllStatus();
 		render(statuses);
 	}
 
@@ -20,18 +20,17 @@ public class Statuses extends Controller {
 	}
 
 	public static void visualizar(String nome) {
-		Status status = Status.find("nome", nome).first();
+		Status status = Status.encontrar_Status(nome);
 		render(status);
 	}
 
 	public static void editar(String nome) {
-		Status statuses = Status.find("nome", nome).first();
+		Status statuses = Status.encontrar_Status(nome);
 		render(statuses);
 	}
 
 	public static void excluir(String nome) {
-		Status statuses = Status.find("nome", nome).first();
-		statuses.delete();
+		Status.dellStatus(nome);
 		index();
 	}
 
@@ -41,14 +40,14 @@ public class Statuses extends Controller {
 			render("Statuses/inserir.html", status);
 		}
 
-		status.save();
+		status.saveStatus();
 		index();
 	}
 
-	public static void editar_status(long id) {
+	public static void editar_status(String nome) {
 		validation.required(request.params.get("nome"));
 		
-		Status status = Status.find("id", id).first();
+		Status status = Status.encontrar_Status(nome);
 		
 		if (validation.hasErrors()) {
 			render("Statuses/editar.html", status);
@@ -56,7 +55,7 @@ public class Statuses extends Controller {
 		
 		status.nome = request.params.get("nome");
 		
-		status.save();
+		status.saveStatus();
 		index();
 	}
 }

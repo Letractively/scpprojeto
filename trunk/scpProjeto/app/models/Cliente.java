@@ -1,11 +1,14 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import play.db.jpa.*;
 import play.data.validation.*;
 import javax.persistence.*;
 
-@Entity
-public class Cliente extends Model {
+
+public class Cliente extends BancoDados{
 		
 	@Required
 	public String pnome;
@@ -32,5 +35,22 @@ public class Cliente extends Model {
 	
 	public String toString() {
 		return "" + pnome + " " + cpf;
+	}
+	
+	public static Cliente encontrar_Cliente(String cpf) {
+		return null;//TODO
+	}
+	
+	public static List<Cliente> getAllCliente() {
+		List<Cliente> retorno = new ArrayList<Cliente>();
+		return retorno;//TODO
+	}
+	
+	public static void dellCliente(String cpf) {
+		//TODO
+	}
+	
+	public void saveCliente() {
+		// TODO
 	}
 }
