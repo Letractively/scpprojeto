@@ -1,0 +1,91 @@
+#{extends 'main.html' /}
+#{set title:'Edi��o' /}
+
+#{form @Pedidos.buscar(pedidos.numPedido)}
+
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="cliente">Cliente:</label></p>
+			</div>
+			<div class="dir">
+			<p>${pedidos.cliente}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="pacote">Pacotes:</label></p>
+			</div>
+			<div class="dir">
+			<p>${pedidos.pacote}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="status">Status:</label></p>
+			</div>
+			<div class="dir">
+			<p>${pedidos.status}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="formaPag">Forma de Pagamento:</label></p>
+			</div>
+			<div class="dir">
+				<p>${pedidos.formaPag}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="funcionario">Funcionario:</label></p>
+			</div>
+			<div class="dir">
+			<p>${pedidos.funcionario}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="numPedido">Numero de Pedido:</label></p>
+			</div>
+			<div class="dir">
+				<p>${pedidos.numPedido}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="dataInscricao">Data de Inscricao:</label></p>
+			</div>
+			<div class="dir">
+				<p>${pedidos.dataInscricao}</p>
+			</div>
+		</div>
+	</div>
+	<div class="linha">
+		<div class="duas-colunas">
+			<div class="esq">
+				<p><label for="dataCadastro">Data de Cadastro:</label></p>
+			</div>
+			<div class="dir">
+				<p>${pedidos.dataCadastro}</p>
+			</div>
+		</div>
+	</div>
+	
+#{/form}
+
+<div class="menuTools">
+	<p><a href="@{Application.index()}">Voltar</p>
+	</div>

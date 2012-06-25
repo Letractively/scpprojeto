@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                                       Application.index
+GET		/busca									Application.busca
 GET		/cliente								Clientes.index
 GET		/cliente/visualizar						Clientes.visualizar
 GET		/cliente/cadastrar						Clientes.inserir
