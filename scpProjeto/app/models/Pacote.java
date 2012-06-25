@@ -12,7 +12,7 @@ public class Pacote {
 
 	@Required
 	public String nome;
-	public int net;
+	public int internet;
 	public int tv;
 	public int telefone;
 	
@@ -20,9 +20,9 @@ public class Pacote {
 		super();
 	}
 
-	public Pacote(String nome, int net, int tv, int telefone) {
+	public Pacote(String nome, int internet, int tv, int telefone) {
 		this.nome = nome;
-		this.net = net;
+		this.internet = internet;
 		this.tv = tv;
 		this.telefone = telefone;
 	}

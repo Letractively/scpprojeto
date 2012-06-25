@@ -22,7 +22,30 @@ public class Funcionarios extends Controller {
 
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 		try {
-			funcionarios = getAllFuncionario();
+			BancoDados.conectar();
+			Connection con1 = BancoDados.con;
+			
+			PreparedStatement pstm;
+			ResultSet rs;
+			List<Funcionario> retorno = new ArrayList<Funcionario>();
+			
+			String query = "select * from funcionario ORDER BY pnome";
+			pstm = (PreparedStatement) con1.prepareStatement(query);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				Funcionario func = new Funcionario(rs.getString("username"),
+						rs.getString("pnome"), rs.getString("unome"),
+						rs.getString("cpf"), rs.getString("telefone"),
+						rs.getString("endereco"), rs.getString("email"),
+						rs.getString("password"), rs.getString("rg"));
+			
+				retorno.add(func);
+			
+			}
+			funcionarios = retorno;
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -37,7 +60,34 @@ public class Funcionarios extends Controller {
 	public static void visualizar(String cpf) {
 		Funcionario funcionario = new Funcionario();
 		try {
-			funcionario = encontrar_Funcionario(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Funcionario funcionario1 = new Funcionario();
+			
+			String query = "Select * from funcionario where cpf = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				funcionario1.username = rs.getString("username");
+				funcionario1.pnome = rs.getString("pnome");
+				funcionario1.unome = rs.getString("unome");
+				funcionario1.email = rs.getString("email");
+				funcionario1.password = rs.getString("password");
+				funcionario1.rg = rs.getString("rg");
+				funcionario1.telefone = rs.getString("telefone");
+				funcionario1.cpf = rs.getString("cpf");
+				funcionario1.endereco = rs.getString("endereco");
+			
+			}
+			funcionario = funcionario1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,7 +98,34 @@ public class Funcionarios extends Controller {
 	public static void editar(String cpf) {
 		Funcionario funcionario = new Funcionario();
 		try {
-			funcionario = encontrar_Funcionario(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Funcionario funcionario1 = new Funcionario();
+			
+			String query = "Select * from funcionario where cpf = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				funcionario1.username = rs.getString("username");
+				funcionario1.pnome = rs.getString("pnome");
+				funcionario1.unome = rs.getString("unome");
+				funcionario1.email = rs.getString("email");
+				funcionario1.password = rs.getString("password");
+				funcionario1.rg = rs.getString("rg");
+				funcionario1.telefone = rs.getString("telefone");
+				funcionario1.cpf = rs.getString("cpf");
+				funcionario1.endereco = rs.getString("endereco");
+			
+			}
+			funcionario = funcionario1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,7 +135,14 @@ public class Funcionarios extends Controller {
 
 	public static void excluir(String cpf) {
 		try {
-			dellFuncionario(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "DELETE FROM funcionario where cpf = ?";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,7 +166,25 @@ public class Funcionarios extends Controller {
 		}
 
 		try {
-			saveFuncionario(funcionario);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "insert into funcionario ( username, pnome, unome, cpf, telefone, endereco, email, password, passwordHash, rg) values (?,?,?,?,?,?,?,?,?,?)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			pstm.setString(1, funcionario.username);
+			pstm.setString(2, funcionario.pnome);
+			pstm.setString(3, funcionario.unome);
+			pstm.setString(4, funcionario.cpf);
+			pstm.setString(5, funcionario.telefone);
+			pstm.setString(6, funcionario.endereco);
+			pstm.setString(7, funcionario.email);
+			pstm.setString(8, funcionario.password);
+			pstm.setString(9, funcionario.passwordHash);
+			pstm.setString(10, funcionario.rg);
+			
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,9 +196,36 @@ public class Funcionarios extends Controller {
 		validation.required(request.params.get("pnome"));
 		validation.required(request.params.get("cpf"));
 
-		Funcionario funcionario = new Funcionario();
+		Funcionario funcionario = null;
 		try {
-			funcionario = encontrar_Funcionario(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Funcionario funcionario1 = new Funcionario();
+			
+			String query = "Select * from funcionario where cpf = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				funcionario1.username = rs.getString("username");
+				funcionario1.pnome = rs.getString("pnome");
+				funcionario1.unome = rs.getString("unome");
+				funcionario1.email = rs.getString("email");
+				funcionario1.password = rs.getString("password");
+				funcionario1.rg = rs.getString("rg");
+				funcionario1.telefone = rs.getString("telefone");
+				funcionario1.cpf = rs.getString("cpf");
+				funcionario1.endereco = rs.getString("endereco");
+			
+			}
+			funcionario = funcionario1;
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -117,8 +246,33 @@ public class Funcionarios extends Controller {
 			funcionario.endereco = request.params.get("endereco");
 
 			try {
-				dellFuncionario(cpf);
-				saveFuncionario(funcionario);
+				BancoDados.conectar();
+				Connection con1 = BancoDados.con;
+				PreparedStatement pstm1;
+				
+				String query1 = "DELETE FROM funcionario where cpf = ?";
+				pstm1 = (PreparedStatement) con1.prepareStatement(query1);
+				pstm1.setString(1, cpf);
+				pstm1.execute();
+				BancoDados.conectar();
+				Connection con = BancoDados.con;
+				PreparedStatement pstm;
+				
+				String query = "insert into funcionario ( username, pnome, unome, cpf, telefone, endereco, email, password, passwordHash, rg) values (?,?,?,?,?,?,?,?,?,?)";
+				pstm = (PreparedStatement) con.prepareStatement(query);
+				
+				pstm.setString(1, funcionario.username);
+				pstm.setString(2, funcionario.pnome);
+				pstm.setString(3, funcionario.unome);
+				pstm.setString(4, funcionario.cpf);
+				pstm.setString(5, funcionario.telefone);
+				pstm.setString(6, funcionario.endereco);
+				pstm.setString(7, funcionario.email);
+				pstm.setString(8, funcionario.password);
+				pstm.setString(9, funcionario.passwordHash);
+				pstm.setString(10, funcionario.rg);
+				
+				pstm.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -127,99 +281,6 @@ public class Funcionarios extends Controller {
 		index();
 	}
 
-	public static Funcionario encontrar_Funcionario(String cpf)
-			throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-		ResultSet rs;
-
-		Funcionario funcionario = new Funcionario();
-
-		String query = "Select * from funcionario where cpf = ?";
-
-		pstm = (PreparedStatement) con.prepareStatement(query);
-		pstm.setString(1, cpf);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-
-			funcionario.username = rs.getString("username");
-			funcionario.pnome = rs.getString("pnome");
-			funcionario.unome = rs.getString("unome");
-			funcionario.email = rs.getString("email");
-			funcionario.password = rs.getString("password");
-			funcionario.rg = rs.getString("rg");
-			funcionario.telefone = rs.getString("telefone");
-			funcionario.cpf = rs.getString("cpf");
-			funcionario.endereco = rs.getString("endereco");
-
-		}
-
-		return funcionario;
-	}
-
-	public static List<Funcionario> getAllFuncionario() throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-
-		PreparedStatement pstm;
-		ResultSet rs;
-		List<Funcionario> retorno = new ArrayList<Funcionario>();
-
-		String query = "select * from funcionario ORDER BY (pnome)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-
-			Funcionario func = new Funcionario(rs.getString("username"),
-					rs.getString("pnome"), rs.getString("unome"),
-					rs.getString("cpf"), rs.getString("telefone"),
-					rs.getString("endereco"), rs.getString("email"),
-					rs.getString("password"), rs.getString("rg"));
-
-			retorno.add(func);
-
-		}
-		return retorno;
-	}
-
-	public static void dellFuncionario(String cpf) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-
-		String query = "DELETE FROM funcionario where cpf = ?";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-		pstm.setString(1, cpf);
-		pstm.execute();
-	}
-
-	public static void saveFuncionario(Funcionario func) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-
-		String query = "insert into funcionario ( username, pnome, unome, cpf, telefone, endereco, email, password, passwordHash, rg) values (?,?,?,?,?,?,?,?,?,?)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		pstm.setString(1, func.username);
-		pstm.setString(2, func.pnome);
-		pstm.setString(3, func.unome);
-		pstm.setString(4, func.cpf);
-		pstm.setString(5, func.telefone);
-		pstm.setString(6, func.endereco);
-		pstm.setString(7, func.email);
-		pstm.setString(8, func.password);
-		pstm.setString(9, func.passwordHash);
-		pstm.setString(10, func.rg);
-
-		pstm.execute();
-
-	}
 	public static boolean isValidLogin(String username, String password) throws SQLException {
 		BancoDados.conectar();
 		Connection con = BancoDados.con;

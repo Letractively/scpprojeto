@@ -18,7 +18,26 @@ public class Pacotes extends Controller {
 	public static void index() {
 		List<Pacote> pacotes = new ArrayList<Pacote>();
 		try {
-			pacotes = getAllPacote();
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			
+			PreparedStatement pstm;
+			ResultSet rs;
+			List<Pacote> pacotelist = new ArrayList<Pacote>();
+			
+			String query = "select * from pacote ORDER BY (nome)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				Pacote pacote = new Pacote(rs.getString("nome"), rs.getInt("internet"), rs.getInt("tv"), rs.getInt("telefone"));
+			
+				pacotelist.add(pacote);
+			
+			}
+			pacotes = pacotelist;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,7 +52,28 @@ public class Pacotes extends Controller {
 	public static void visualizar(String nome) {
 		Pacote pacote = new Pacote();
 		try {
-			pacote = encontrar_Pacote(nome);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Pacote pacote1 = new Pacote();
+			
+			String query = "SELECT * FROM pacote where nome = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, nome);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				pacote1.nome = rs.getString("nome");
+				pacote1.internet = rs.getInt("internet");
+				pacote1.telefone = rs.getInt("telefone");
+			
+			}
+			pacote = pacote1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,7 +84,28 @@ public class Pacotes extends Controller {
 	public static void editar(String nome) {
 		Pacote pacotes= new Pacote();
 		try {
-			pacotes = encontrar_Pacote(nome);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Pacote pacote = new Pacote();
+			
+			String query = "SELECT * FROM pacote where nome = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, nome);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				pacote.nome = rs.getString("nome");
+				pacote.internet = rs.getInt("internet");
+				pacote.telefone = rs.getInt("telefone");
+			
+			}
+			pacotes = pacote;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,7 +115,14 @@ public class Pacotes extends Controller {
 
 	public static void excluir(String nome) {
 		try {
-			dellPacote(nome);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "DELETE FROM pacote where nome = ?";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, nome);
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,15 +130,30 @@ public class Pacotes extends Controller {
 		index();
 	}
 
-	public static void cadastrar_pacote(@Required String nome, int net, int tv,
+	public static void cadastrar_pacote(@Required String nome, int internet, int tv,
 			int telefone) {
-		Pacote pacote = new Pacote(nome, net, tv, telefone);
+		Pacote pacote = new Pacote(nome, internet, tv, telefone);
 		if (validation.hasErrors()) {
 			render("Pacotes/inserir.html", pacote);
 		}
 
 		try {
-			savePacote(pacote);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "insert into pacote (nome, internet, tv, telefone) values (?,?,?,?)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			
+			pstm.setString(1, pacote.nome);
+			pstm.setInt(2, pacote.internet);
+			pstm.setInt(3, pacote.tv);
+			pstm.setInt(4, pacote.telefone);
+			
+			
+			
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,7 +166,28 @@ public class Pacotes extends Controller {
 
 		Pacote pacote = new Pacote();
 		try {
-			pacote = encontrar_Pacote(nome);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Pacote pacote1 = new Pacote();
+			
+			String query = "SELECT * FROM pacote where nome = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, nome);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				pacote1.nome = rs.getString("nome");
+				pacote1.internet = rs.getInt("internet");
+				pacote1.telefone = rs.getInt("telefone");
+			
+			}
+			pacote = pacote1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,93 +200,27 @@ public class Pacotes extends Controller {
 		pacote.nome = request.params.get("nome");
 
 		try {
-			savePacote(pacote);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "insert into pacote (nome, internet, tv, telefone) values (?,?,?,?)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			
+			pstm.setString(1, pacote.nome);
+			pstm.setInt(2, pacote.internet);
+			pstm.setInt(3, pacote.tv);
+			pstm.setInt(4, pacote.telefone);
+			
+			
+			
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		index();
-	}
-
-	public static Pacote encontrar_Pacote(String nome) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-		ResultSet rs;
-
-		Pacote pacote = new Pacote();
-
-		String query = "SELECT * FROM pacote where nome = ?";
-
-		pstm = (PreparedStatement) con.prepareStatement(query);
-		pstm.setString(1, nome);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-
-			pacote.nome = rs.getString("nome");
-			pacote.net = rs.getInt("net");
-			pacote.telefone = rs.getInt("telefone");
-
-		}
-
-		return pacote;
-
-	}
-
-	public static List<Pacote> getAllPacote() throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-
-		PreparedStatement pstm;
-		ResultSet rs;
-		List<Pacote> pacotelist = new ArrayList<Pacote>();
-
-		String query = "select * from status ORDER BY (nome)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-
-			Pacote pacote = new Pacote(rs.getString("nome"), rs.getInt("net"), rs.getInt("tv"), rs.getInt("telefone"));
-
-			pacotelist.add(pacote);
-
-		}
-		return pacotelist;
-
-	}
-
-	public static void dellPacote(String nome) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-
-		String query = "DELETE FROM pacote where nome = ?";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-		pstm.setString(1, nome);
-		pstm.execute();
-	}
-
-	public static void savePacote(Pacote pacote) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-
-		String query = "insert into pacote (nome, net, tv, telefone) values (?,?,?,?)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		
-		pstm.setString(1, pacote.nome);
-		pstm.setInt(2, pacote.net);
-		pstm.setInt(3, pacote.tv);
-		pstm.setInt(4, pacote.telefone);
-		
-		
-
-		pstm.execute();
 	}
 
 }
