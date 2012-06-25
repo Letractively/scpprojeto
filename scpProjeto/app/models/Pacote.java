@@ -7,8 +7,8 @@ import javax.persistence.*;
 
 import java.util.*;
 
-@Entity
-public class Pacote extends Model {
+
+public class Pacote {
 
 	@Required
 	public String nome;
@@ -21,6 +21,23 @@ public class Pacote extends Model {
 		this.net = net;
 		this.tv = tv;
 		this.telefone = telefone;
+	}
+	
+	public static Pacote encontrar_Pacote(String nome) {
+		return null;//TODO
+	}
+	
+	public static List<Pacote> getAllPacote() {
+		List<Pacote> retorno = new ArrayList<Pacote>();
+		return retorno;//TODO
+	}
+	
+	public static void dellPacote(String nome) {
+		//TODO
+	}
+	
+	public void savePacote() {
+		// TODO
 	}
 
 }

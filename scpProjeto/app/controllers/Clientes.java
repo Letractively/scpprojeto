@@ -11,7 +11,7 @@ import models.*;
 public class Clientes extends Controller {
 	
 	public static void index() {
-		List<Cliente> clientes = Cliente.find("order by pnome asc").fetch();
+		List<Cliente> clientes = Cliente.getAllCliente();
 		render (clientes);
 	}
 	
@@ -20,18 +20,19 @@ public class Clientes extends Controller {
 	}
 	
 	public static void visualizar(String cpf) {
-		Cliente cliente = Cliente.find("cpf", cpf).first();
+		Cliente cliente = Cliente.encontrar_Cliente(cpf);
 		render(cliente);
 	}
 	
 	public static void editar(String cpf) {
-		Cliente cliente = Cliente.find("cpf", cpf).first();
+		Cliente cliente = Cliente.encontrar_Cliente(cpf);
+
 		render(cliente);
 	}
 	
 	public static void excluir(String cpf) {
-		Cliente cliente = Cliente.find("cpf", cpf).first();
-		cliente.delete();
+		
+		Cliente.dellCliente(cpf);
 		index();
 	}
 	
@@ -41,16 +42,15 @@ public class Clientes extends Controller {
 		if (validation.hasErrors()) {
 			render("Clientes/inserir.html", cliente);
 		}
-		
-		cliente.save();
+		cliente.saveCliente();
 		index();
 	}
 	
-	public static void editar_cliente(long id) {
+	public static void editar_cliente(String cpf) {
 		validation.required(request.params.get("pnome"));
 		validation.required(request.params.get("cpf"));
 		
-		Cliente cliente = Cliente.find("id", id).first();
+		Cliente cliente = Cliente.encontrar_Cliente(cpf);
 		
 		if (validation.hasErrors()) {
 			render("Clientes/editar.html", cliente);
@@ -62,7 +62,8 @@ public class Clientes extends Controller {
 		cliente.cpf = request.params.get("cpf");
 		cliente.endereco = request.params.get("endereco");
 		
-		cliente.save();
+		Cliente.dellCliente(cpf);
+		cliente.saveCliente();
 		index();
 	}
 	
