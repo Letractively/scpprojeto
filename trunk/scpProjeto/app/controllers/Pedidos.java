@@ -16,44 +16,68 @@ import models.*;
 public class Pedidos extends Controller {
 
 	public static void index() {
-		List<Pedido> pedidos = Pedido.getAllPedido();
+		List<Pedido> pedidos = new ArrayList<Pedido>();
+		try {
+			pedidos = getAllPedido();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(pedidos);
 	}
 
 	public static void inserir() {
-		List<Cliente> clientes = null;
-		List<Pacote> pacotes = null;
-		List<Status> statuses = null;
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		List<Pacote> pacotes = new ArrayList<Pacote>();
+		List<Status> statuses = new ArrayList<Status>();
 		try {
 			clientes = Clientes.getAllCliente();
-			pacotes = Pacote.getAllPacote();
-			statuses = Status.getAllStatus();
+			pacotes = Pacotes.getAllPacote();
+			statuses = Statuses.getAllStatus();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}// do controler cliente
 
-		List<Funcionario> funcionarios = Funcionario.getAllFuncionario();
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		try {
+			funcionarios = Funcionarios.getAllFuncionario();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(clientes, pacotes, statuses, funcionarios);
 	}
 
 	public static void visualizar(String numPedido) {
-		Pedido pedido = Pedido.encontrar_Pedido(numPedido);
+		Pedido pedido = new Pedido();
+		try {
+			pedido = Pedidos.encontrar_Pedido(numPedido);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(pedido);
 
 	}
 
 	public static void editar(String cliente) {
-		Pedido pedidos = Pedido.encontrar_Pedido(cliente);
-		List<Cliente> clientes = null;
-		List<Pacote> pacotes = null;
-		List<Status> statuses = null;
-		List<Funcionario> funcionarios = null;
+		Pedido pedidos = null;
+		try {
+			pedidos = encontrar_Pedido(cliente);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		List<Pacote> pacotes = new ArrayList<Pacote>();
+		List<Status> statuses = new ArrayList<Status>();
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 		try {
 			clientes = Clientes.getAllCliente();
-			pacotes = Pacote.getAllPacote();
-			statuses = Status.getAllStatus();
-			funcionarios = Funcionario.getAllFuncionario();
+			pacotes = Pacotes.getAllPacote();
+			statuses = Statuses.getAllStatus();
+			funcionarios = Funcionarios.getAllFuncionario();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +87,12 @@ public class Pedidos extends Controller {
 	}
 
 	public static void excluir(String numPedido) {
-		Pedido.dellPedido(numPedido);
+		try {
+			dellPedido(numPedido);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
@@ -76,7 +105,12 @@ public class Pedidos extends Controller {
 			render("Pedidos/inserir.html", pedido);
 		}
 
-		pedido.savePedido();
+		try {
+			savePedido(pedido);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
@@ -84,7 +118,13 @@ public class Pedidos extends Controller {
 		validation.required(request.params.get("cliente"));
 		validation.required(request.params.get("pacote"));
 
-		Pedido pedido = Pedido.encontrar_Pedido(numPedido);
+		Pedido pedido = new Pedido();
+		try {
+			pedido = encontrar_Pedido(numPedido);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (validation.hasErrors()) {
 			render("Pedidos/editar.html", pedido);
@@ -99,7 +139,12 @@ public class Pedidos extends Controller {
 		pedido.dataInscricao = request.params.get("dataInscricao");
 		pedido.dataCadastro = request.params.get("dataCadastro");
 
-		pedido.savePedido();
+		try {
+			savePedido(pedido);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
@@ -171,7 +216,7 @@ public class Pedidos extends Controller {
 		pstm.execute();
 	}
 
-	public void savePedido(Pedido pedido) throws SQLException {
+	public static void savePedido(Pedido pedido) throws SQLException {
 		
 		BancoDados.conectar();
 		Connection con = BancoDados.con;

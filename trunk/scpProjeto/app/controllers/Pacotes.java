@@ -16,7 +16,13 @@ import models.*;
 public class Pacotes extends Controller {
 
 	public static void index() {
-		List<Pacote> pacotes = Pacote.getAllPacote();
+		List<Pacote> pacotes = null;
+		try {
+			pacotes = getAllPacote();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(pacotes);
 	}
 
@@ -25,17 +31,34 @@ public class Pacotes extends Controller {
 	}
 
 	public static void visualizar(String nome) {
-		Pacote pacote = Pacote.encontrar_Pacote(nome);
+		Pacote pacote = null;
+		try {
+			pacote = encontrar_Pacote(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(pacote);
 	}
 
 	public static void editar(String nome) {
-		Pacote pacotes = Pacote.encontrar_Pacote(nome);
+		Pacote pacotes= null;
+		try {
+			pacotes = encontrar_Pacote(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(pacotes);
 	}
 
 	public static void excluir(String nome) {
-		Pacote.dellPacote(nome);
+		try {
+			dellPacote(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
@@ -46,14 +69,25 @@ public class Pacotes extends Controller {
 			render("Pacotes/inserir.html", pacote);
 		}
 
-		pacote.savePacote();
+		try {
+			savePacote(pacote);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
 	public static void editar_pacote(String nome) {
 		validation.required(request.params.get("nome"));
 
-		Pacote pacote = Pacote.encontrar_Pacote(nome);
+		Pacote pacote = null;
+		try {
+			pacote = encontrar_Pacote(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (validation.hasErrors()) {
 			render("Pacotes/editar.html", pacote);
@@ -61,7 +95,12 @@ public class Pacotes extends Controller {
 
 		pacote.nome = request.params.get("nome");
 
-		pacote.savePacote();
+		try {
+			savePacote(pacote);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
@@ -127,7 +166,7 @@ public class Pacotes extends Controller {
 		pstm.execute();
 	}
 
-	public void savePacote(Pacote pacote) throws SQLException {
+	public static void savePacote(Pacote pacote) throws SQLException {
 		BancoDados.conectar();
 		Connection con = BancoDados.con;
 		PreparedStatement pstm;

@@ -16,7 +16,13 @@ import models.*;
 public class Statuses extends Controller {
 
 	public static void index() {
-		List<Status> statuses = Status.getAllStatus();
+		List<Status> statuses = null;
+		try {
+			statuses = getAllStatus();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(statuses);
 	}
 
@@ -25,17 +31,34 @@ public class Statuses extends Controller {
 	}
 
 	public static void visualizar(String nome) {
-		Status status = Status.encontrar_Status(nome);
+		Status status = null;
+		try {
+			status = encontrar_Status(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(status);
 	}
 
 	public static void editar(String nome) {
-		Status statuses = Status.encontrar_Status(nome);
+		Status statuses = null;
+		try {
+			statuses = encontrar_Status(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render(statuses);
 	}
 
 	public static void excluir(String nome) {
-		Status.dellStatus(nome);
+		try {
+			dellStatus(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
@@ -45,14 +68,25 @@ public class Statuses extends Controller {
 			render("Statuses/inserir.html", status);
 		}
 
-		status.saveStatus();
+		try {
+			saveStatus(status);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
 	public static void editar_status(String nome) {
 		validation.required(request.params.get("nome"));
 
-		Status status = Status.encontrar_Status(nome);
+		Status status = null;
+		try {
+			status = encontrar_Status(nome);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (validation.hasErrors()) {
 			render("Statuses/editar.html", status);
@@ -60,7 +94,12 @@ public class Statuses extends Controller {
 
 		status.nome = request.params.get("nome");
 
-		status.saveStatus();
+		try {
+			saveStatus(status);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		index();
 	}
 
@@ -123,7 +162,7 @@ public class Statuses extends Controller {
 		pstm.execute();
 	}
 
-	public void saveStatus(Status status) throws SQLException {
+	public static void saveStatus(Status status) throws SQLException {
 		BancoDados.conectar();
 		Connection con = BancoDados.con;
 		PreparedStatement pstm;
