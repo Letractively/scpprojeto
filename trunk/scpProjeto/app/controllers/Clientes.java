@@ -11,7 +11,7 @@ import models.*;
 public class Clientes extends Controller {
 	
 	public static void index() {
-		List<Cliente> clientes = Cliente.getAllCliente();
+		List<Cliente> clientes = getAllCliente();
 		render (clientes);
 	}
 	
@@ -20,19 +20,19 @@ public class Clientes extends Controller {
 	}
 	
 	public static void visualizar(String cpf) {
-		Cliente cliente = Cliente.encontrar_Cliente(cpf);
+		Cliente cliente = encontrar_Cliente(cpf);
 		render(cliente);
 	}
 	
 	public static void editar(String cpf) {
-		Cliente cliente = Cliente.encontrar_Cliente(cpf);
+		Cliente cliente = encontrar_Cliente(cpf);
 
 		render(cliente);
 	}
 	
 	public static void excluir(String cpf) {
 		
-		Cliente.dellCliente(cpf);
+		dellCliente(cpf);
 		index();
 	}
 	
@@ -42,7 +42,8 @@ public class Clientes extends Controller {
 		if (validation.hasErrors()) {
 			render("Clientes/inserir.html", cliente);
 		}
-		cliente.saveCliente();
+		
+		saveCliente(cliente);
 		index();
 	}
 	
@@ -50,7 +51,7 @@ public class Clientes extends Controller {
 		validation.required(request.params.get("pnome"));
 		validation.required(request.params.get("cpf"));
 		
-		Cliente cliente = Cliente.encontrar_Cliente(cpf);
+		Cliente cliente = encontrar_Cliente(cpf);
 		
 		if (validation.hasErrors()) {
 			render("Clientes/editar.html", cliente);
@@ -62,9 +63,26 @@ public class Clientes extends Controller {
 		cliente.cpf = request.params.get("cpf");
 		cliente.endereco = request.params.get("endereco");
 		
-		Cliente.dellCliente(cpf);
-		cliente.saveCliente();
+		dellCliente(cpf);
+		saveCliente(cliente);
 		index();
+	}
+	
+	public static Cliente encontrar_Cliente(String cpf) {
+		return null;//TODO
+	}
+	
+	public static List<Cliente> getAllCliente() {
+		List<Cliente> retorno = new ArrayList<Cliente>();
+		return retorno;//TODO
+	}
+	
+	public static void dellCliente(String cpf) {
+		//TODO
+	}
+	
+	public static void saveCliente(Cliente cliente) {
+		// TODO
 	}
 	
 }

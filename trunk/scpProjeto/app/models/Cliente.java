@@ -36,21 +36,4 @@ public class Cliente extends BancoDados{
 	public String toString() {
 		return "" + pnome + " " + cpf;
 	}
-	
-	public static Cliente encontrar_Cliente(String cpf) {
-		return null;//TODO
-	}
-	
-	public static List<Cliente> getAllCliente() {
-		List<Cliente> retorno = new ArrayList<Cliente>();
-		return retorno;//TODO
-	}
-	
-	public static void dellCliente(String cpf) {
-		//TODO
-	}
-	
-	public void saveCliente() {
-		// TODO
-	}
 }
