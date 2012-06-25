@@ -16,7 +16,7 @@ public class Pedidos extends Controller {
     }
 
 	public static void inserir() {
-		List<Cliente> clientes = Cliente.getAllCliente();
+		List<Cliente> clientes = Clientes.getAllCliente();//do controler cliente
 		List<Pacote> pacotes = Pacote.getAllPacote();
 		List<Status> statuses = Status.getAllStatus();
 		List<Funcionario> funcionarios = Funcionario.getAllFuncionario();
@@ -31,7 +31,7 @@ public class Pedidos extends Controller {
 
 	public static void editar(String cliente) {
 		Pedido pedidos = Pedido.encontrar_Pedido(cliente);
-		List<Cliente> clientes = Cliente.getAllCliente();
+		List<Cliente> clientes = Clientes.getAllCliente();
 		List<Pacote> pacotes = Pacote.getAllPacote();
 		List<Status> statuses = Status.getAllStatus();
 		List<Funcionario> funcionarios = Funcionario.getAllFuncionario();
