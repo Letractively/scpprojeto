@@ -22,7 +22,7 @@ public class Funcionarios extends Controller {
 
 		List<Funcionario> funcionarios = null;
 		try {
-			funcionarios = getAllFunc();
+			funcionarios = getAllFuncionario();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class Funcionarios extends Controller {
 	public static void visualizar(String cpf) {
 		Funcionario funcionario = null;
 		try {
-			funcionario = obterFunc(cpf);
+			funcionario = encontrar_Funcionario(cpf);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,7 +48,7 @@ public class Funcionarios extends Controller {
 	public static void editar(String cpf) {
 		Funcionario funcionario = null;
 		try {
-			funcionario = obterFunc(cpf);
+			funcionario = encontrar_Funcionario(cpf);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class Funcionarios extends Controller {
 
 	public static void excluir(String cpf) {
 		try {
-			apagarFunc(cpf);
+			dellFuncionario(cpf);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,7 +82,7 @@ public class Funcionarios extends Controller {
 		}
 
 		try {
-			salvarFunc(funcionario);
+			saveFuncionario(funcionario);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,7 +96,7 @@ public class Funcionarios extends Controller {
 
 		Funcionario funcionario = null;
 		try {
-			funcionario = obterFunc(cpf);
+			funcionario = encontrar_Funcionario(cpf);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -117,8 +117,8 @@ public class Funcionarios extends Controller {
 			funcionario.endereco = request.params.get("endereco");
 
 			try {
-				apagarFunc(cpf);
-				salvarFunc(funcionario);
+				dellFuncionario(cpf);
+				saveFuncionario(funcionario);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -127,34 +127,8 @@ public class Funcionarios extends Controller {
 		index();
 	}
 
-	public static List<Funcionario> getAllFunc() throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-
-		PreparedStatement pstm;
-		ResultSet rs;
-		List<Funcionario> retorno = new ArrayList<Funcionario>();
-
-		String query = "select * from funcionario ORDER BY (name)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-
-			Funcionario func = new Funcionario(rs.getString("username"),
-					rs.getString("pnome"), rs.getString("unome"),
-					rs.getString("cpf"), rs.getString("telefone"),
-					rs.getString("endereco"), rs.getString("email"),
-					rs.getString("password"), rs.getString("rg"));
-
-			retorno.add(func);
-
-		}
-		return retorno;
-	}
-
-	public static Funcionario obterFunc(String cpf) throws SQLException {
+	public static Funcionario encontrar_Funcionario(String cpf)
+			throws SQLException {
 		BancoDados.conectar();
 		Connection con = BancoDados.con;
 		PreparedStatement pstm;
@@ -183,10 +157,36 @@ public class Funcionarios extends Controller {
 		}
 
 		return funcionario;
-
 	}
 
-	public static void apagarFunc(String cpf) throws SQLException {
+	public static List<Funcionario> getAllFuncionario() throws SQLException {
+		BancoDados.conectar();
+		Connection con = BancoDados.con;
+
+		PreparedStatement pstm;
+		ResultSet rs;
+		List<Funcionario> retorno = new ArrayList<Funcionario>();
+
+		String query = "select * from funcionario ORDER BY (name)";
+		pstm = (PreparedStatement) con.prepareStatement(query);
+
+		rs = pstm.executeQuery();
+
+		while (rs.next()) {
+
+			Funcionario func = new Funcionario(rs.getString("username"),
+					rs.getString("pnome"), rs.getString("unome"),
+					rs.getString("cpf"), rs.getString("telefone"),
+					rs.getString("endereco"), rs.getString("email"),
+					rs.getString("password"), rs.getString("rg"));
+
+			retorno.add(func);
+
+		}
+		return retorno;
+	}
+
+	public static void dellFuncionario(String cpf) throws SQLException {
 		BancoDados.conectar();
 		Connection con = BancoDados.con;
 		PreparedStatement pstm;
@@ -195,10 +195,9 @@ public class Funcionarios extends Controller {
 		pstm = (PreparedStatement) con.prepareStatement(query);
 		pstm.setString(1, cpf);
 		pstm.execute();
-
 	}
 
-	public static void salvarFunc(Funcionario func) throws SQLException {
+	public static void saveFuncionario(Funcionario func) throws SQLException {
 		BancoDados.conectar();
 		Connection con = BancoDados.con;
 		PreparedStatement pstm;
