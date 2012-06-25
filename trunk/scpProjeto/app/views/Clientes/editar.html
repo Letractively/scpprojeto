@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Edição' /}
 
-#{form @Clientes.editar_cliente(cliente.id)}
+#{form @Clientes.editar_cliente(cliente.cpf)}
 	#{ifErrors}
 	  <div class="linha"><p style="color:red;"><strong>ATENÇÃO: </strong>Preencha todos os campos obrigatórios.</p></div>
 		<div class="linha"></div>

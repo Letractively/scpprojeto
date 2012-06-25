@@ -18,7 +18,28 @@ public class Clientes extends Controller {
 	public static void index() {
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {
-			clientes = getAllCliente();
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			
+			PreparedStatement pstm;
+			ResultSet rs;
+			List<Cliente> retorno = new ArrayList<Cliente>();
+			
+			String query = "select * from cliente ORDER BY (pnome)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				Cliente func = new Cliente(rs.getString("pnome"),
+						rs.getString("unome"), rs.getString("cpf"),
+						rs.getString("telefone"), rs.getString("endereco"));
+			
+				retorno.add(func);
+			
+			}
+			clientes = retorno;
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -33,7 +54,28 @@ public class Clientes extends Controller {
 	public static void visualizar(String cpf) {
 		Cliente cliente = new Cliente();
 		try {
-			cliente = encontrar_Cliente(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Cliente cliente1 = new Cliente();
+			
+			String query = "SELECT * FROM cliente where cpf = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				cliente1.pnome = rs.getString("pnome");
+				cliente1.unome = rs.getString("unome");
+				cliente1.cpf = rs.getString("cpf");
+				cliente1.telefone = rs.getString("telefone");
+				cliente1.endereco = rs.getString("endereco");
+			}
+			cliente = cliente1;
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -44,7 +86,28 @@ public class Clientes extends Controller {
 	public static void editar(String cpf) {
 		Cliente cliente = new Cliente();
 		try {
-			cliente = encontrar_Cliente(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Cliente cliente1 = new Cliente();
+			
+			String query = "SELECT * FROM cliente where cpf = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				cliente1.pnome = rs.getString("pnome");
+				cliente1.unome = rs.getString("unome");
+				cliente1.cpf = rs.getString("cpf");
+				cliente1.telefone = rs.getString("telefone");
+				cliente1.endereco = rs.getString("endereco");
+			}
+			cliente = cliente1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +118,14 @@ public class Clientes extends Controller {
 	public static void excluir(String cpf) {
 
 		try {
-			dellCliente(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+
+			String query = "DELETE FROM cliente where cpf = ?";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,7 +142,20 @@ public class Clientes extends Controller {
 		}
 
 		try {
-			saveCliente(cliente);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+
+			String query = "insert into cliente ( pnome, unome, cpf, telefone, endereco) values (?,?,?,?,?)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+
+			pstm.setString(1, cliente.pnome);
+			pstm.setString(2, cliente.unome);
+			pstm.setString(3, cliente.cpf);
+			pstm.setString(4, cliente.telefone);
+			pstm.setString(5, cliente.endereco);
+
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,7 +169,28 @@ public class Clientes extends Controller {
 
 		Cliente cliente = new Cliente();
 		try {
-			cliente = encontrar_Cliente(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Cliente cliente1 = new Cliente();
+			
+			String query = "SELECT * FROM cliente where cpf = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				cliente1.pnome = rs.getString("pnome");
+				cliente1.unome = rs.getString("unome");
+				cliente1.cpf = rs.getString("cpf");
+				cliente1.telefone = rs.getString("telefone");
+				cliente1.endereco = rs.getString("endereco");
+			}
+			cliente = cliente1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -102,100 +206,38 @@ public class Clientes extends Controller {
 		cliente.endereco = request.params.get("endereco");
 
 		try {
-			dellCliente(cpf);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+
+			String query = "DELETE FROM cliente where cpf = ?";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, cpf);
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			saveCliente(cliente);
+		try {//salvar
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+
+			String query = "insert into cliente ( pnome, unome, cpf, telefone, endereco) values (?,?,?,?,?)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+
+			pstm.setString(1, cliente.pnome);
+			pstm.setString(2, cliente.unome);
+			pstm.setString(3, cliente.cpf);
+			pstm.setString(4, cliente.telefone);
+			pstm.setString(5, cliente.endereco);
+
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		index();
-	}
-
-	public static Cliente encontrar_Cliente(String cpf) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-		ResultSet rs;
-
-		Cliente cliente = new Cliente();
-
-		String query = "SELECT * FROM cliente where cpf = ?";
-
-		pstm = (PreparedStatement) con.prepareStatement(query);
-		pstm.setString(1, cpf);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-			cliente.pnome = rs.getString("pnome");
-			cliente.unome = rs.getString("unome");
-			cliente.cpf = rs.getString("cpf");
-			cliente.telefone = rs.getString("telefone");
-			cliente.endereco = rs.getString("endereco");
-		}
-
-		return cliente;
-
-	}
-
-	public static List<Cliente> getAllCliente() throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-
-		PreparedStatement pstm;
-		ResultSet rs;
-		List<Cliente> retorno = new ArrayList<Cliente>();
-
-		String query = "select * from cliente ORDER BY (pnome)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-
-			Cliente func = new Cliente(rs.getString("pnome"),
-					rs.getString("unome"), rs.getString("cpf"),
-					rs.getString("telefone"), rs.getString("endereco"));
-
-			retorno.add(func);
-
-		}
-		return retorno;
-
-	}
-
-	public static void dellCliente(String cpf) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-
-		String query = "DELETE FROM cliente where cpf = ?";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-		pstm.setString(1, cpf);
-		pstm.execute();
-	}
-
-	public static void saveCliente(Cliente cliente) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-
-		String query = "insert into cliente ( pnome, unome, cpf, telefone, endereco) values (?,?,?,?,?)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		pstm.setString(1, cliente.pnome);
-		pstm.setString(2, cliente.unome);
-		pstm.setString(3, cliente.cpf);
-		pstm.setString(4, cliente.telefone);
-		pstm.setString(4, cliente.endereco);
-
-		pstm.execute();
-
 	}
 
 }

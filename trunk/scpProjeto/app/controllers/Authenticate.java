@@ -1,6 +1,9 @@
 package controllers;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import play.data.validation.Valid;
 import play.mvc.Controller;
@@ -24,7 +27,25 @@ public class Authenticate extends Controller {
 		}
 		// se ñ der erro, loga o usuario e vai pra pagina inicial
 		try {
-			Funcionarios.saveFuncionario(funcionario);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "insert into funcionario ( username, pnome, unome, cpf, telefone, endereco, email, password, passwordHash, rg) values (?,?,?,?,?,?,?,?,?,?)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			pstm.setString(1, funcionario.username);
+			pstm.setString(2, funcionario.pnome);
+			pstm.setString(3, funcionario.unome);
+			pstm.setString(4, funcionario.cpf);
+			pstm.setString(5, funcionario.telefone);
+			pstm.setString(6, funcionario.endereco);
+			pstm.setString(7, funcionario.email);
+			pstm.setString(8, funcionario.password);
+			pstm.setString(9, funcionario.passwordHash);
+			pstm.setString(10, funcionario.rg);
+			
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

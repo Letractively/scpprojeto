@@ -8,7 +8,7 @@ import play.data.validation.*;
 import javax.persistence.*;
 
 
-public class Cliente extends BancoDados{
+public class Cliente {
 		
 	@Required
 	public String pnome;

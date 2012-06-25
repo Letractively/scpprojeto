@@ -18,7 +18,26 @@ public class Statuses extends Controller {
 	public static void index() {
 		List<Status> statuses = new ArrayList<Status>();
 		try {
-			statuses = getAllStatus();
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			
+			PreparedStatement pstm;
+			ResultSet rs;
+			List<Status> statuses1 = new ArrayList<Status>();
+			
+			String query = "select * from status ORDER BY (nome)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				Status status = new Status(rs.getString("nome"));
+			
+				statuses1.add(status);
+			
+			}
+			statuses = statuses1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,7 +52,26 @@ public class Statuses extends Controller {
 	public static void visualizar(String nome) {
 		Status status = new Status();
 		try {
-			status = encontrar_Status(nome);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Status status1 = new Status();
+			
+			String query = "Select * from status where nome = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, nome);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				status1.nome = rs.getString("nome");
+			
+			}
+			status = status1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,7 +82,26 @@ public class Statuses extends Controller {
 	public static void editar(String nome) {
 		Status statuses = new Status();
 		try {
-			statuses = encontrar_Status(nome);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Status status = new Status();
+			
+			String query = "Select * from status where nome = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, nome);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				status.nome = rs.getString("nome");
+			
+			}
+			statuses = status;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,7 +111,14 @@ public class Statuses extends Controller {
 
 	public static void excluir(String nome) {
 		try {
-			dellStatus(nome);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "DELETE FROM status where nome = ?";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, nome);
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,7 +133,16 @@ public class Statuses extends Controller {
 		}
 
 		try {
-			saveStatus(status);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "insert into status (status) values (?)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			pstm.setString(1, status.nome);
+			
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,7 +155,26 @@ public class Statuses extends Controller {
 
 		Status status = new Status();
 		try {
-			status = encontrar_Status(nome);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			ResultSet rs;
+			
+			Status status1 = new Status();
+			
+			String query = "Select * from status where nome = ?";
+			
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			pstm.setString(1, nome);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+			
+				status1.nome = rs.getString("nome");
+			
+			}
+			status = status1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,84 +187,20 @@ public class Statuses extends Controller {
 		status.nome = request.params.get("nome");
 
 		try {
-			saveStatus(status);
+			BancoDados.conectar();
+			Connection con = BancoDados.con;
+			PreparedStatement pstm;
+			
+			String query = "insert into status (status) values (?)";
+			pstm = (PreparedStatement) con.prepareStatement(query);
+			
+			pstm.setString(1, status.nome);
+			
+			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		index();
-	}
-
-	public static Status encontrar_Status(String nome) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-		ResultSet rs;
-
-		Status status = new Status();
-
-		String query = "Select * from status where nome = ?";
-
-		pstm = (PreparedStatement) con.prepareStatement(query);
-		pstm.setString(1, nome);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-
-			status.nome = rs.getString("nome");
-
-		}
-
-		return status;
-	}
-
-	public static List<Status> getAllStatus() throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-
-		PreparedStatement pstm;
-		ResultSet rs;
-		List<Status> statuses = new ArrayList<Status>();
-
-		String query = "select * from status ORDER BY (nome)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		rs = pstm.executeQuery();
-
-		while (rs.next()) {
-
-			Status status = new Status(rs.getString("nome"));
-
-			statuses.add(status);
-
-		}
-		return statuses;
-
-	}
-
-	public static void dellStatus(String nome) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-
-		String query = "DELETE FROM status where nome = ?";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-		pstm.setString(1, nome);
-		pstm.execute();
-	}
-
-	public static void saveStatus(Status status) throws SQLException {
-		BancoDados.conectar();
-		Connection con = BancoDados.con;
-		PreparedStatement pstm;
-
-		String query = "insert into status (status) values (?)";
-		pstm = (PreparedStatement) con.prepareStatement(query);
-
-		pstm.setString(1, status.nome);
-
-		pstm.execute();
-
 	}
 }
