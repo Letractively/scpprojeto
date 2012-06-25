@@ -25,6 +25,10 @@ public class Cliente extends BancoDados{
 	@Required
 	public String endereco;
 	
+	public Cliente (){
+		super();
+	}
+	
 	public Cliente (String pnome, String unome, String cpf, String telefone, String endereco) {
 		this.pnome = pnome;
 		this.unome = unome;
