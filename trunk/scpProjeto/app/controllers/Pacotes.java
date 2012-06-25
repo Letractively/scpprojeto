@@ -58,5 +58,22 @@ public class Pacotes extends Controller {
 		pacote.savePacote();
 		index();
 	}
+	
+	public static Pacote encontrar_Pacote(String nome) {
+		return null;//TODO
+	}
+	
+	public static List<Pacote> getAllPacote() {
+		List<Pacote> retorno = new ArrayList<Pacote>();
+		return retorno;//TODO
+	}
+	
+	public static void dellPacote(String nome) {
+		//TODO
+	}
+	
+	public void savePacote() {
+		// TODO
+	}
 
 }
