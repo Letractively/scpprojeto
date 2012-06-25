@@ -80,5 +80,22 @@ public class Pedidos extends Controller {
 		pedido.savePedido();
 		index();
 	}
+	
+	public static Pedido encontrar_Pedido(String numPedido) {
+		return null;//TODO
+	}
+	
+	public static List<Pedido> getAllPedido() {
+		List<Pedido> retorno = new ArrayList<Pedido>();
+		return retorno;//TODO
+	}
+	
+	public static void dellPedido(String nome) {
+		//TODO
+	}
+	
+	public void savePedido() {
+		// TODO
+	}
 
 }
