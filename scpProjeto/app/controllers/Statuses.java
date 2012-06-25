@@ -88,16 +88,52 @@ public class Statuses extends Controller {
 		return status;
 	}
 
-	public static List<Status> getAllStatus() {
-		List<Status> retorno = new ArrayList<Status>();
-		return retorno;// TODO
+	public static List<Status> getAllStatus() throws SQLException {
+		BancoDados.conectar();
+		Connection con = BancoDados.con;
+
+		PreparedStatement pstm;
+		ResultSet rs;
+		List<Status> statuses = new ArrayList<Status>();
+
+		String query = "select * from status ORDER BY (nome)";
+		pstm = (PreparedStatement) con.prepareStatement(query);
+
+		rs = pstm.executeQuery();
+
+		while (rs.next()) {
+
+			Status status = new Status(rs.getString("nome"));
+
+			statuses.add(status);
+
+		}
+		return statuses;
+
 	}
 
-	public static void dellStatus(String nome) {
-		// TODO
+	public static void dellStatus(String nome) throws SQLException {
+		BancoDados.conectar();
+		Connection con = BancoDados.con;
+		PreparedStatement pstm;
+
+		String query = "DELETE FROM status where nome = ?";
+		pstm = (PreparedStatement) con.prepareStatement(query);
+		pstm.setString(1, nome);
+		pstm.execute();
 	}
 
-	public void saveStatus() {
-		// TODO
+	public void saveStatus(Status status) throws SQLException {
+		BancoDados.conectar();
+		Connection con = BancoDados.con;
+		PreparedStatement pstm;
+
+		String query = "insert into status (status) values (?)";
+		pstm = (PreparedStatement) con.prepareStatement(query);
+
+		pstm.setString(1, status.nome);
+
+		pstm.execute();
+
 	}
 }
