@@ -76,20 +76,7 @@ public class Funcionario {
 		return (username != null && pnome != null && unome != null && cpf != null && telefone != null && endereco != null && email != null && rg != null);
 	}
 	
-	public static Funcionario encontrar_Funcionario(String cpf) {
-		return null;//TODO
-	}
 	
-	public static List<Funcionario> getAllFuncionario() {
-		List<Funcionario> retorno = new ArrayList<Funcionario>();
-		return retorno;//TODO
-	}
 	
-	public static void dellFuncionario(String cpf) {
-		//TODO
-	}
 	
-	public void saveFuncionario() {
-		// TODO
-	}
 }
