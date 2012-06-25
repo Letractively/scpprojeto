@@ -43,14 +43,19 @@ public class Authenticate extends Controller {
 	}
 
 	public static void doLogin(String username, String password) {
-		if (Funcionario.isValidLogin(username, password)) {
-			doLoginLogic(username);
-			Application.index();
-		} else {
-			validation.addError("username",
-					"Combinação de Usuário/senha incorreta, tente novamente</br>");
-			validation.keep();
-			login();
+		try {
+			if (Funcionarios.isValidLogin(username, password)) {
+				doLoginLogic(username);
+				Application.index();
+			} else {
+				validation.addError("username",
+						"Combinação de Usuário/senha incorreta, tente novamente</br>");
+				validation.keep();
+				login();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

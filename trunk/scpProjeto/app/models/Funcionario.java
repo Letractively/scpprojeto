@@ -70,12 +70,7 @@ public class Funcionario {
 		this.passwordHash = Codec.hexMD5(password);
 	}
 
-	public static boolean isValidLogin(String username, String password) {//NAO VAI EXISTIR DEPOIS
-		//true se bateu com uma combinação username/senha
-		
-		return false;
-		//return (count("username=? AND PasswordHash=?", username,Codec.hexMD5(password)) == 1);
-	}
+	
 
 	public boolean isvalid() {
 		return (username != null && pnome != null && unome != null && cpf != null && telefone != null && endereco != null && email != null && rg != null);

@@ -15,6 +15,10 @@ public class Pacote {
 	public int net;
 	public int tv;
 	public int telefone;
+	
+	public Pacote() {
+		super();
+	}
 
 	public Pacote(String nome, int net, int tv, int telefone) {
 		this.nome = nome;
