@@ -13,7 +13,7 @@ import play.data.validation.Required;
 import play.libs.F;
 import play.mvc.Controller;
 
-public class Funcionarios extends Controller {
+public class Basearsenesse extends Controller {
 
 	public static void index() {
 

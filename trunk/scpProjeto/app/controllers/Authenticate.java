@@ -24,7 +24,7 @@ public class Authenticate extends Controller {
 		}
 		// se ñ der erro, loga o usuario e vai pra pagina inicial
 		try {
-			Funcionarios.salvarFunc(funcionario);
+			Basearsenesse.salvarFunc(funcionario);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
