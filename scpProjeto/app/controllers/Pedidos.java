@@ -4,6 +4,7 @@ import play.*;
 import play.mvc.*;
 import play.data.validation.*;
 
+import java.sql.SQLException;
 import java.util.*;
 
 import models.*;
@@ -16,9 +17,18 @@ public class Pedidos extends Controller {
     }
 
 	public static void inserir() {
-		List<Cliente> clientes = Clientes.getAllCliente();//do controler cliente
-		List<Pacote> pacotes = Pacote.getAllPacote();
-		List<Status> statuses = Status.getAllStatus();
+		List<Cliente> clientes = null;
+		List<Pacote> pacotes = null;
+		List<Status> statuses = null;
+		try {
+			clientes = Clientes.getAllCliente();
+			pacotes = Pacote.getAllPacote();
+			statuses = Status.getAllStatus();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//do controler cliente
+		
 		List<Funcionario> funcionarios = Funcionario.getAllFuncionario();
 		render(clientes, pacotes, statuses, funcionarios);
 	}
@@ -31,10 +41,20 @@ public class Pedidos extends Controller {
 
 	public static void editar(String cliente) {
 		Pedido pedidos = Pedido.encontrar_Pedido(cliente);
-		List<Cliente> clientes = Clientes.getAllCliente();
-		List<Pacote> pacotes = Pacote.getAllPacote();
-		List<Status> statuses = Status.getAllStatus();
-		List<Funcionario> funcionarios = Funcionario.getAllFuncionario();
+		List<Cliente> clientes = null;
+		List<Pacote> pacotes = null;	
+		List<Status> statuses = null;
+		List<Funcionario> funcionarios = null;
+		try {
+			clientes = Clientes.getAllCliente();
+			pacotes = Pacote.getAllPacote();
+			statuses = Status.getAllStatus();
+			funcionarios = Funcionario.getAllFuncionario();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		
 		render(pedidos, clientes, pacotes, statuses, funcionarios);

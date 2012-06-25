@@ -136,23 +136,24 @@ public class Funcionarios extends Controller {
 
 		Funcionario funcionario = new Funcionario();
 
-		String query = "Select * from produtoitem where id = (select max(id) from produtoitem)";
+		String query = "Select * from funcionario where cpf = ?";
 
 		pstm = (PreparedStatement) con.prepareStatement(query);
+		pstm.setString(1, cpf);
 
 		rs = pstm.executeQuery();
 
 		while (rs.next()) {
 
-			funcionario.username = request.params.get("username");
-			funcionario.pnome = request.params.get("pnome");
-			funcionario.unome = request.params.get("unome");
-			funcionario.email = request.params.get("email");
-			funcionario.password = request.params.get("password");
-			funcionario.rg = request.params.get("rg");
-			funcionario.telefone = request.params.get("telefone");
-			funcionario.cpf = request.params.get("cpf");
-			funcionario.endereco = request.params.get("endereco");
+			funcionario.username = rs.getString("username");
+			funcionario.pnome = rs.getString("pnome");
+			funcionario.unome = rs.getString("unome");
+			funcionario.email = rs.getString("email");
+			funcionario.password = rs.getString("password");
+			funcionario.rg = rs.getString("rg");
+			funcionario.telefone = rs.getString("telefone");
+			funcionario.cpf = rs.getString("cpf");
+			funcionario.endereco = rs.getString("endereco");
 
 		}
 
@@ -167,7 +168,7 @@ public class Funcionarios extends Controller {
 		ResultSet rs;
 		List<Funcionario> retorno = new ArrayList<Funcionario>();
 
-		String query = "select * from funcionario ORDER BY (name)";
+		String query = "select * from funcionario ORDER BY (pnome)";
 		pstm = (PreparedStatement) con.prepareStatement(query);
 
 		rs = pstm.executeQuery();
