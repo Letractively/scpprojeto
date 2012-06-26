@@ -1,6 +1,6 @@
 #{extends 'main.html' /} #{set title:'Edição' /} 
 
-#{form @Pacotes.editar_pacote(pacotes.id)} 
+#{form @Pacotes.editar_pacote(pacotes.nome)} 
 #{ifErrors}
 <div class="linha">
 	<p style="color: red;">

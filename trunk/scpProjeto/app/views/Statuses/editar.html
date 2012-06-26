@@ -1,5 +1,5 @@
 #{extends 'main.html' /} #{set title:'Edi��o' /} 
-#{form @Statuses.editar_status(statuses.id)} 
+#{form @Statuses.editar_status(status.nome)} 
 #{ifErrors}
 <div class="linha">
 	<p style="color: red;">
@@ -18,7 +18,7 @@
 			</div>
 			<div class="dir">
 				<p>
-					<input type="text" name="nome" id="nome" value="${statuses.nome}" />
+					<input type="text" name="nome" id="nome" value="${status.nome}" />
 				</p>
 			</div>
 		</div>

@@ -20,22 +20,22 @@ public class Statuses extends Controller {
 		try {
 			BancoDados.conectar();
 			Connection con = BancoDados.con;
-			
+
 			PreparedStatement pstm;
 			ResultSet rs;
 			List<Status> statuses1 = new ArrayList<Status>();
-			
+
 			String query = "select * from status ORDER BY (nome)";
 			pstm = (PreparedStatement) con.prepareStatement(query);
-			
+
 			rs = pstm.executeQuery();
-			
+
 			while (rs.next()) {
-			
+
 				Status status = new Status(rs.getString("nome"));
-			
+
 				statuses1.add(status);
-			
+
 			}
 			statuses = statuses1;
 		} catch (SQLException e) {
@@ -56,20 +56,20 @@ public class Statuses extends Controller {
 			Connection con = BancoDados.con;
 			PreparedStatement pstm;
 			ResultSet rs;
-			
+
 			Status status1 = new Status();
-			
+
 			String query = "Select * from status where nome = ?";
-			
+
 			pstm = (PreparedStatement) con.prepareStatement(query);
 			pstm.setString(1, nome);
-			
+
 			rs = pstm.executeQuery();
-			
+
 			while (rs.next()) {
-			
+
 				status1.nome = rs.getString("nome");
-			
+
 			}
 			status = status1;
 		} catch (SQLException e) {
@@ -80,33 +80,29 @@ public class Statuses extends Controller {
 	}
 
 	public static void editar(String nome) {
-		Status statuses = new Status();
+		Status status = new Status();
 		try {
 			BancoDados.conectar();
 			Connection con = BancoDados.con;
 			PreparedStatement pstm;
 			ResultSet rs;
-			
-			Status status = new Status();
-			
+
 			String query = "Select * from status where nome = ?";
-			
+
 			pstm = (PreparedStatement) con.prepareStatement(query);
 			pstm.setString(1, nome);
-			
+
 			rs = pstm.executeQuery();
-			
+
 			while (rs.next()) {
-			
 				status.nome = rs.getString("nome");
-			
 			}
-			statuses = status;
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		render(statuses);
+		render(status);
 	}
 
 	public static void excluir(String nome) {
@@ -114,7 +110,7 @@ public class Statuses extends Controller {
 			BancoDados.conectar();
 			Connection con = BancoDados.con;
 			PreparedStatement pstm;
-			
+
 			String query = "DELETE FROM status where nome = ?";
 			pstm = (PreparedStatement) con.prepareStatement(query);
 			pstm.setString(1, nome);
@@ -136,12 +132,12 @@ public class Statuses extends Controller {
 			BancoDados.conectar();
 			Connection con = BancoDados.con;
 			PreparedStatement pstm;
-			
-			String query = "insert into status (status) values (?)";
+
+			String query = "insert into status (nome) values (?)";
 			pstm = (PreparedStatement) con.prepareStatement(query);
-			
+
 			pstm.setString(1, status.nome);
-			
+
 			pstm.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -159,22 +155,18 @@ public class Statuses extends Controller {
 			Connection con = BancoDados.con;
 			PreparedStatement pstm;
 			ResultSet rs;
-			
-			Status status1 = new Status();
-			
+
 			String query = "Select * from status where nome = ?";
-			
+
 			pstm = (PreparedStatement) con.prepareStatement(query);
 			pstm.setString(1, nome);
-			
+
 			rs = pstm.executeQuery();
-			
+
 			while (rs.next()) {
-			
-				status1.nome = rs.getString("nome");
-			
+				status.nome = rs.getString("nome");
 			}
-			status = status1;
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,20 +175,34 @@ public class Statuses extends Controller {
 		if (validation.hasErrors()) {
 			render("Statuses/editar.html", status);
 		}
-
-		status.nome = request.params.get("nome");
+		
+		Status status2 = new Status();
+		status2.nome = request.params.get("nome");
 
 		try {
+			// Apagar
+			BancoDados.conectar();
+			Connection con1 = BancoDados.con;
+			PreparedStatement pstm1;
+
+			String query1 = "DELETE FROM status where nome = ?";
+			pstm1 = (PreparedStatement) con1.prepareStatement(query1);
+			pstm1.setString(1, nome);//
+			pstm1.executeQuery();
+
+			// Inserir
+			
 			BancoDados.conectar();
 			Connection con = BancoDados.con;
 			PreparedStatement pstm;
-			
-			String query = "insert into status (status) values (?)";
+
+			String query = "insert into status (nome) values (?)";
 			pstm = (PreparedStatement) con.prepareStatement(query);
-			
-			pstm.setString(1, status.nome);
-			
+
+			pstm.setString(1, status2.nome);
+
 			pstm.execute();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
