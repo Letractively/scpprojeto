@@ -166,12 +166,22 @@ public class Pacotes extends Controller {
 
 		Pacote pacote = new Pacote();
 		try {
+			//apagando
+			BancoDados.conectar();
+			Connection con1 = BancoDados.con;
+			PreparedStatement pstm1;
+			
+			String query1 = "DELETE FROM pacote where nome = ?";
+			pstm1 = (PreparedStatement) con1.prepareStatement(query1);
+			pstm1.setString(1, nome);
+			pstm1.execute();
+			
+			//inserindo
 			BancoDados.conectar();
 			Connection con = BancoDados.con;
 			PreparedStatement pstm;
 			ResultSet rs;
 			
-			Pacote pacote1 = new Pacote();
 			
 			String query = "SELECT * FROM pacote where nome = ?";
 			
@@ -182,12 +192,12 @@ public class Pacotes extends Controller {
 			
 			while (rs.next()) {
 			
-				pacote1.nome = rs.getString("nome");
-				pacote1.internet = rs.getInt("internet");
-				pacote1.telefone = rs.getInt("telefone");
+				pacote.nome = rs.getString("nome");
+				pacote.internet = rs.getInt("internet");
+				pacote.telefone = rs.getInt("telefone");
 			
 			}
-			pacote = pacote1;
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

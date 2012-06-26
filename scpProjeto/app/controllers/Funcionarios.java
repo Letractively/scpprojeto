@@ -246,6 +246,8 @@ public class Funcionarios extends Controller {
 			funcionario.endereco = request.params.get("endereco");
 
 			try {
+				
+				//apagando
 				BancoDados.conectar();
 				Connection con1 = BancoDados.con;
 				PreparedStatement pstm1;
@@ -254,6 +256,12 @@ public class Funcionarios extends Controller {
 				pstm1 = (PreparedStatement) con1.prepareStatement(query1);
 				pstm1.setString(1, cpf);
 				pstm1.execute();
+				
+				
+				
+				
+				
+				//inserindo
 				BancoDados.conectar();
 				Connection con = BancoDados.con;
 				PreparedStatement pstm;
